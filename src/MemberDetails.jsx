@@ -1,5 +1,5 @@
 import React from 'react';
-import IEEELogo from './IEEE12010.png'; 
+import IEEELogo from '/IEEE12010.png'; 
 
 const MemberProfileSection = ({ name, title, bio, image, quote }) => {
   return (
