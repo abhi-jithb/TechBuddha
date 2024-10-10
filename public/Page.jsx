@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Info } from 'lucide-react';
 
-import agustineImg from './assets/agustine.jpeg';
-import mithilImg from './assets/mithil.jpeg';
-import antonyImg from './assets/antony.jpeg';
-import aryanImg from './assets/aryan.jpeg';
+import agustineImg from './agustine.jpeg';
+import mithilImg from './mithil.jpeg';
+import antonyImg from './antony.jpeg';
+import aryanImg from './aryan.jpeg';
 
 const executives = [
   {
