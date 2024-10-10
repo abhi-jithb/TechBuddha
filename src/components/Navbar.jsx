@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import { styles } from "../styles";
 import { navLinks } from "../constants";
@@ -9,6 +9,7 @@ const Navbar = () => {
   const [active, setActive] = useState("");
   const [toggle, setToggle] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +26,20 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavClick = (title, id) => {
+    setActive(title);
+    setToggle(false);
+
+    if (location.pathname !== '/') {
+      window.location.href = `/${id}`;
+    } else {
+      const element = document.getElementById(id.slice(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <nav
       className={`${
@@ -37,15 +52,10 @@ const Navbar = () => {
         <Link
           to='/'
           className='flex items-center gap-2'
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-          }}
+          onClick={() => handleNavClick("", "#")}
         >
-          <img src={logo} alt='logo' className='w-9 h-9 object-contain' />
-          <p className='text-white text-[18px] font-bold cursor-pointer flex '>
-            Adrian &nbsp;
-            <span className='sm:block hidden'> | JavaScript Mastery</span>
+          <p className='text-white text-[28px] font-bold cursor-pointer flex '>
+            Tech-Buddha &nbsp;
           </p>
         </Link>
 
@@ -56,9 +66,9 @@ const Navbar = () => {
               className={`${
                 active === nav.title ? "text-white" : "text-secondary"
               } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
+              onClick={() => handleNavClick(nav.title, `#${nav.id}`)}
             >
-              <a href={`#${nav.id}`}>{nav.title}</a>
+              {nav.title}
             </li>
           ))}
         </ul>
@@ -83,12 +93,9 @@ const Navbar = () => {
                   className={`font-poppins font-medium cursor-pointer text-[16px] ${
                     active === nav.title ? "text-white" : "text-secondary"
                   }`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
+                  onClick={() => handleNavClick(nav.title, `#${nav.id}`)}
                 >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
+                  {nav.title}
                 </li>
               ))}
             </ul>

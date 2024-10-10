@@ -1,66 +1,81 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
 
-import { styles } from "../styles";
-import { SectionWrapper } from "../hoc";
-import { fadeIn, textVariant } from "../utils/motion";
-import { testimonials } from "../constants";
-
-const FeedbackCard = ({
-  index,
-  testimonial,
-  name,
-  designation,
-  company,
-  image,
-}) => (
-  <motion.div
-    variants={fadeIn("", "spring", index * 0.5, 0.75)}
-    className='bg-black-200 p-10 rounded-3xl xs:w-[320px] w-full'
-  >
-    <p className='text-white font-black text-[48px]'>"</p>
-
-    <div className='mt-1'>
-      <p className='text-white tracking-wider text-[18px]'>{testimonial}</p>
-
-      <div className='mt-7 flex justify-between items-center gap-1'>
-        <div className='flex-1 flex flex-col'>
-          <p className='text-white font-medium text-[16px]'>
-            <span className='blue-text-gradient'>@</span> {name}
-          </p>
-          <p className='mt-1 text-secondary text-[12px]'>
-            {designation} of {company}
-          </p>
-        </div>
-
-        <img
-          src={image}
-          alt={`feedback_by-${name}`}
-          className='w-10 h-10 rounded-full object-cover'
-        />
+const TestimonialCard = ({ quote, author, role }) => (
+  <div className="bg-gray-800/50 rounded-3xl p-8 backdrop-blur-sm">
+    <div className="text-cyan-400 text-7xl mb-6">"</div>
+    <p className="text-gray-200 text-lg mb-8 leading-relaxed">
+      {quote}
+    </p>
+    <div className="flex items-center gap-4">
+      <img 
+        src="/api/placeholder/48/48" 
+        alt={author} 
+        className="w-12 h-12 rounded-full"
+      />
+      <div>
+        <h3 className="text-white font-medium text-lg">{author}</h3>
+        <p className="text-gray-400">{role}</p>
       </div>
     </div>
-  </motion.div>
+  </div>
 );
 
-const Feedbacks = () => {
+export default function TestimonialsSection() {
+  const testimonials = [
+    {
+      quote: "It is usually people in the money business, finance, and international trade that are really rich.",
+      author: "Kenn Gallagher",
+      role: "Founder & Leader"
+    },
+    {
+      quote: "It is usually people in the money business, finance, and international trade that are really rich.",
+      author: "Kenn Gallagher",
+      role: "Founder & Leader"
+    },
+    {
+      quote: "It is usually people in the money business, finance, and international trade that are really rich.",
+      author: "Kenn Gallagher",
+      role: "Founder & Leader"
+    }
+  ];
+
   return (
-    <div className={`mt-12 bg-black-100 rounded-[20px]`}>
-      <div
-        className={`bg-tertiary rounded-2xl ${styles.padding} min-h-[300px]`}
-      >
-        <motion.div variants={textVariant()}>
-          <p className={styles.sectionSubText}>What others say</p>
-          <h2 className={styles.sectionHeadText}>Testimonials.</h2>
-        </motion.div>
-      </div>
-      <div className={`-mt-20 pb-14 ${styles.paddingX} flex flex-wrap gap-7`}>
-        {testimonials.map((testimonial, index) => (
-          <FeedbackCard key={testimonial.name} index={index} {...testimonial} />
-        ))}
+    <div className="min-h-screen bg-navy-950 p-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mb-16">
+          <div>
+            <h2 className="text-5xl font-semibold leading-tight">
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 text-transparent bg-clip-text">
+                What people
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 text-transparent bg-clip-text">
+                are saying
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-400 text-transparent bg-clip-text">
+                about us
+              </span>
+            </h2>
+          </div>
+          <div className="flex items-center">
+            <p className="text-gray-400 text-xl">
+              Everything you need to accept card payments and grow your business anywhere on the planet.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((testimonial, index) => (
+            <TestimonialCard
+              key={index}
+              quote={testimonial.quote}
+              author={testimonial.author}
+              role={testimonial.role}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
-};
-
-export default SectionWrapper(Feedbacks, "");
+}
