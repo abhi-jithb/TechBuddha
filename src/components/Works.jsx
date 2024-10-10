@@ -1,9 +1,9 @@
 import React from 'react';
 
-import agustine from '../agustine.jpeg';
-import mithil from '../mithil.jpeg';
-import antony from '../antony.jpeg';
-import aryan from '../aryan.jpeg';
+import agustine from '/agustine.jpeg';
+import mithil from '/mithil.jpeg';
+import antony from '/antony.jpeg';
+import aryan from '/aryan.jpeg';
 
 const TeamMember = ({ name, role, image }) => (
   <div className="rounded-3xl bg-navy-900/80 p-8 border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300">
