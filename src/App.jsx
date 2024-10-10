@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { About, Contact, Experience, Feedbacks, Hero, Navbar, Works, StarsCanvas } from "./components";
-import ExecutivesDisplay from "../public/Page";
+import ExecutivesDisplay from "./Page";
 import ProfileCard from "./Portfolio";
 import AchievementsSection from "./Portfolio";
 import EnquiryForm from "./components/Contact";
