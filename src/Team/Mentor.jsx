@@ -1,14 +1,14 @@
 import React from 'react';
-import { Calendar, Mail, Share2, Award, BookOpen } from 'lucide-react';
+import { Calendar, Mail, Share2, Award, BookOpen, Star, Linkedin } from 'lucide-react';
 
 const MentorProfile = () => {
   const mentor = {
     name: 'Jacob George',
     title: 'App Development Mentor',
-    image: '/mentor-image.jpg',
+    image: '/Jacob.jpg',
     expertise: 'Mobile & Web Apps',
     experience: '8+ years',
-    description: 'Specializes in React Native and Flutter development',
+    description: 'Specializes in React Native and Flutter development with a passion for creating intuitive and efficient mobile applications. Jacob has a track record of mentoring developers and helping them achieve their full potential in the world of app development.',
     highlights: [
       'Mobile App Development Expert',
       'Full Stack Development',
@@ -27,107 +27,139 @@ const MentorProfile = () => {
     schedule: {
       availability: 'Monday - Friday',
       timeSlots: '2:00 PM - 6:00 PM EST'
+    },
+    rating: 4.9,
+    linkedinUrl: 'https://www.linkedin.com/in/jacobgeorgea?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+    quote: {
+      text: "Jacob's mentorship was instrumental in helping me transition from web to mobile development. His expertise and patient guidance made the learning process both enjoyable and highly effective.",
+      author: "Agustine Vakumcheri",
+      role: "Chief Executive Officer"
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      {/* Header Section */}
-      <div className="flex flex-col md:flex-row gap-6 mb-8">
-        <div className="w-48 h-48 rounded-full overflow-hidden flex-shrink-0">
-          <img
-            src={mentor.image}
-            alt={mentor.name}
-            className="w-full h-full object-cover"
-          />
-        </div>
-        
-        <div className="flex-grow">
-          <h1 className="text-3xl font-bold mb-2">{mentor.name}</h1>
-          <h2 className="text-xl text-gray-600 mb-4">{mentor.title}</h2>
-          
-          <div className="flex gap-4 mb-4">
-            <span className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm">
-              {mentor.expertise}
-            </span>
-            <span className="px-3 py-1 bg-green-500 text-white rounded-full text-sm">
-              {mentor.experience}
-            </span>
-          </div>
-          
-          <p className="text-gray-700 mb-4">{mentor.description}</p>
-          
-          <div className="flex gap-4">
-            <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-              <Mail className="w-4 h-4" />
-              Contact
-            </button>
-            <button className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-              <Share2 className="w-4 h-4" />
-              Share Profile
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Expertise & Skills */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <div className="mb-4">
-            <h3 className="text-xl font-semibold flex items-center gap-2">
-              <Award className="w-5 h-5" />
-              Areas of Expertise
-            </h3>
-          </div>
-          <div className="space-y-2">
-            <ul className="space-y-2">
-              {mentor.highlights.map((highlight, index) => (
-                <li key={index} className="flex items-center gap-2">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                  {highlight}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Technologies */}
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <div className="mb-4">
-            <h3 className="text-xl font-semibold flex items-center gap-2">
-              <BookOpen className="w-5 h-5" />
-              Technologies
-            </h3>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {mentor.technologies.map((tech, index) => (
-              <span 
-                key={index} 
-                className="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm"
-              >
-                {tech}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Availability */}
-        <div className="bg-white rounded-lg shadow-md p-6 md:col-span-2">
-          <div className="mb-4">
-            <h3 className="text-xl font-semibold flex items-center gap-2">
-              <Calendar className="w-5 h-5" />
-              Availability
-            </h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <h4 className="font-medium text-gray-700">Days Available</h4>
-              <p>{mentor.schedule.availability}</p>
+    <div className="bg-gradient-to-b from-gray-900 text-white py-16">
+      <div className="max-w-6xl mx-auto mt-6 px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-48 h-48 rounded-full bg-gray-700 overflow-hidden mb-6">
+                {mentor.image ? (
+                  <img src={mentor.image} alt={mentor.name} className="w-full h-full object-cover" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" className="w-32 h-32 text-gray-600">
+                      <path
+                        fill="currentColor"
+                        d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z"
+                      />
+                    </svg>
+                  </div>
+                )}
+              </div>
+              <h2 className="text-3xl font-bold mb-2">{mentor.name}</h2>
+              <h3 className="text-xl text-gray-400 mb-2">{mentor.title}</h3>
+              <div className="flex items-center gap-2 text-yellow-400 mb-4">
+                <Star className="w-5 h-5 fill-current" />
+                <span className="font-semibold">{mentor.rating}</span>
+              </div>
+              {mentor.linkedinUrl && (
+                <a
+                  href={mentor.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+                >
+                  <Linkedin size={20} />
+                  <span>Connect on LinkedIn</span>
+                </a>
+              )}
+              <p className="text-gray-300 leading-relaxed mb-6">{mentor.description}</p>
+              <div className="flex gap-4">
+                <button className="flex items-center gap-2 px-6 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-700 transition-colors font-semibold">
+                  <Mail className="w-5 h-5" />
+                  Contact
+                </button>
+                <button className="flex items-center gap-2 px-6 py-3 border border-gray-600 rounded-lg hover:bg-gray-700 transition-colors font-semibold text-gray-300">
+                  <Share2 className="w-5 h-5" />
+                  Share Profile
+                </button>
+              </div>
             </div>
-            <div>
-              <h4 className="font-medium text-gray-700">Time Slots</h4>
-              <p>{mentor.schedule.timeSlots}</p>
+          </div>
+
+          <div className="space-y-8">
+            <div className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700">
+              <div className="flex items-start space-x-4">
+                <div className="text-5xl text-cyan-400">"</div>
+                <div>
+                  <p className="text-lg text-gray-300 mb-4">{mentor.quote.text}</p>
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 rounded-full bg-gray-700 overflow-hidden">
+                      <div className="w-full h-full flex items-center justify-center">
+                        <svg viewBox="0 0 24 24" className="w-8 h-8 text-gray-600">
+                          <path
+                            fill="currentColor"
+                            d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold">{mentor.quote.author}</h4>
+                      <p className="text-sm text-gray-400">{mentor.quote.role}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700">
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-3">
+                <Award className="w-6 h-6 text-cyan-400" />
+                Areas of Expertise
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                {mentor.highlights.map((highlight, index) => (
+                  <div key={index} className="bg-gray-700/50 p-4 rounded-xl">
+                    <span className="text-cyan-300">{highlight}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700">
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-3">
+                <BookOpen className="w-6 h-6 text-cyan-400" />
+                Technologies
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {mentor.technologies.map((tech, index) => (
+                  <span 
+                    key={index} 
+                    className="px-4 py-2 bg-gray-700/50 text-cyan-300 rounded-full text-sm font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700">
+              <h3 className="text-xl font-semibold mb-6 flex items-center gap-3">
+                <Calendar className="w-6 h-6 text-cyan-400" />
+                Availability
+              </h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gray-700/50 p-4 rounded-xl">
+                  <h4 className="font-semibold text-cyan-300 mb-2">Days Available</h4>
+                  <p className="text-gray-300">{mentor.schedule.availability}</p>
+                </div>
+                <div className="bg-gray-700/50 p-4 rounded-xl">
+                  <h4 className="font-semibold text-cyan-300 mb-2">Time Slots</h4>
+                  <p className="text-gray-300">{mentor.schedule.timeSlots}</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

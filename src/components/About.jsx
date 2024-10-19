@@ -23,7 +23,7 @@ const MentorCard = () => (
       >
         <div className="flex items-center gap-3">
           <img
-            src="/mentor-image.jpg" 
+            src="/Jacob.jpg" 
             alt='mentor'
             className='w-16 h-16 rounded-full object-cover shrink-0'
           />

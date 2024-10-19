@@ -319,47 +319,32 @@ const mentors = [
 ];
 const experiences = [
   {
-    title: "HOSPEX DETAILS",
-    company_name: "",
-    icon: starbucks,
-    iconBg: "#383E56",
-    date: "",
-    points: [
-      ""
-    ],
-  },
-  {
     title: "Ideathon",
     company_name: "",
-    // icon: tesla,
     iconBg: "#E6DEDD",
-    date: "Jan 2021 - Feb 2022",
-    points: [
-     ""
-    ],
-  },
-{
-    title: "",
-    company_name: "",
-    // icon: shopify,
-    iconBg: "#383E56",
-    date: "",
-    points: [
-      ""
+    date: "2024",
+    images: [
+      "Hospex1.JPG",
+     "Hospex2.JPG",
+     "Hospex3.JPG",
+     "Hospex4.JPG",
     ],
   },
   {
-    title: "",
+    title: "HOSPEX DETAILS",
     company_name: "",
-    // icon: meta,
     iconBg: "#E6DEDD",
-    date: "",
-    points: [
-      "",
+    date: "2024",
+    images: [
+      "Hospexx1.jpeg",
+      "Hospexx2.jpeg",
+      "Hospexx3.jpeg",
+      "Hospexx4.jpeg",
+      "Hospexx5.jpeg",
+      
     ],
   },
 ];
-
 const testimonials = [
   {
     testimonial:
