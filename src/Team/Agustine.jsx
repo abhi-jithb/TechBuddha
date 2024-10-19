@@ -1,30 +1,30 @@
 import React from 'react';
-import AchievementsSection from '../Portfolio';
+import { useParams } from 'react-router-dom'; 
 import MemberProfileSection from '../MemberDetails';
+import AchievementsSection from '../Portfolio';
+import { membersData } from '../constants/index';
 
+const MemberPage = () => {
+  const { memberId } = useParams(); 
+  const memberData = membersData[memberId];
 
-const Agustine = () => {
-  const memberData = {
-    name: "Agustine",
-    title: "CEO",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    image: "/Augstine.jpeg",
-    quote: {
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      author: "Steve Jobs",
-      role: "Co-founder of Apple Inc."
-    }
-  };
+  if (!memberData) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800">Member Not Found</h1>
+          <p className="mt-2 text-gray-600">The requested member profile does not exist.</p>
+        </div>
+      </div>
+    );
+  }
 
-  return <>
- <MemberProfileSection
-        name={memberData.name}
-        title={memberData.title}
-        bio={memberData.bio}
-        image={memberData.image}
-        quote={memberData.quote}
-      />  <AchievementsSection  />;
-  </>
+  return (
+    <>
+      <MemberProfileSection {...memberData} />
+      <AchievementsSection achievements={memberData.achievements} />
+    </>
+  );
 };
 
-export default  Agustine;
+export default MemberPage;

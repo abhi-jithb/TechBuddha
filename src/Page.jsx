@@ -6,35 +6,46 @@ import agustineImg from '/Agustine.jpeg';
 import mithilImg from '/Mithil.jpeg';
 import antonyImg from '/Antony.jpeg';
 import aryanImg from '/Aryan.jpeg';
+import visakhImg from '/Visakh.jpeg';
 
 const executives = [
   {
     name: 'Agustine',
     title: 'CEO',
     image: agustineImg,
-    path: '/Agustine'
+    path: '/members/agustine'
   },
   {
     name: 'Mithil',
     title: 'COO',
     image: mithilImg,
-    path: '/Mithil'
+    path: '/members/mithil'
   },
   {
     name: 'Antony Agnel',
     title: 'Chief Officer',
     image: antonyImg,
-    path: '/Antony-Agnel'
+    path: '/members/antony'
   },
   {
     name: 'Aryan Soji',
     title: 'Executive Officer',
     image: aryanImg,
-    path: '/Aryan'
+    path: '/members/aryan'
   },
 ];
 
-const ExecutiveCard = ({ name, title, image, path }) => (
+const members = [
+  {
+    name: 'Visakh K Vasudevan',
+    title: 'Member',
+    image: visakhImg,
+    path: '/members/visakh'
+  },
+  // Add more members here as needed
+];
+
+const ProfileCard = ({ name, title, image, path }) => (
   <div className="bg-slate-50 rounded-3xl py-16 p-6 flex flex-col items-center space-y-4 transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
     <div className="w-32 h-32 rounded-full bg-slate-200 border-2 border-slate-300 overflow-hidden">
       {image ? (
@@ -70,19 +81,36 @@ const ExecutiveCard = ({ name, title, image, path }) => (
 export default function ExecutivesDisplay() {
   return (
     <div className="min-h-screen bg-slate-900 p-8">
-      <div className="space-y-8">
-        <div className="text-center space-y-4 mt-14">
-          <h1 className="text-5xl font-bold text-blue-400 mb-2">
-            Executives and Members
-          </h1>
-          <h2 className="text-4xl font-semibold text-slate-300">
-            TOP EXECUTIVES
-          </h2>
+      <div className="space-y-20">
+        {/* Executives Section */}
+        <div className="space-y-8">
+          <div className="text-center space-y-4 mt-14">
+            <h1 className="text-5xl font-bold text-blue-400 mb-2">
+              Executives and Members
+            </h1>
+            <h2 className="text-4xl font-semibold text-slate-300">
+              TOP EXECUTIVES
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mt-12">
+            {executives.map((exec, index) => (
+              <ProfileCard key={index} {...exec} />
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto mt-12">
-          {executives.map((exec, index) => (
-            <ExecutiveCard key={index} {...exec} />
-          ))}
+
+        {/* Members Section */}
+        <div className="space-y-8">
+          <div className="text-center">
+            <h2 className="text-4xl font-semibold text-slate-300">
+              MEMBERS
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {members.map((member, index) => (
+              <ProfileCard key={`member-${index}`} {...member} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

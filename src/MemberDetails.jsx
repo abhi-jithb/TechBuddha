@@ -1,7 +1,9 @@
 import React from 'react';
-import IEEELogo from '/IEEE12010.png'; 
+import IEEELogo from '/IEEE12010.png';
+import { Linkedin } from 'lucide-react';
 
-const MemberProfileSection = ({ name, title, bio, image, quote }) => {
+
+const MemberProfileSection = ({ name, title, bio, image, quote, linkedinUrl }) => {
   return (
     <div className="bg-gradient-to-b from-gray-900 text-white py-16">
       <div className="max-w-6xl mx-auto mt-6 px-8">
@@ -23,7 +25,18 @@ const MemberProfileSection = ({ name, title, bio, image, quote }) => {
                 )}
               </div>
               <h2 className="text-3xl font-bold mb-2">{name}</h2>
-              <h3 className="text-xl text-gray-400 mb-6">{title}</h3>
+              <h3 className="text-xl text-gray-400 mb-2">{title}</h3>
+              {linkedinUrl && (
+                <a
+                  href={linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors mb-6"
+                >
+                  <Linkedin size={20} />
+                  <span>Connect on LinkedIn</span>
+                </a>
+              )}
               <p className="text-gray-300 leading-relaxed">{bio}</p>
             </div>
           </div>

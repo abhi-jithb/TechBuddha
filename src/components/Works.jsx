@@ -47,10 +47,10 @@ export default function TeamSection() {
     <div className="min-h-screen bg-navy-950 p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-white/80 text-2xl mb-4 text-center">
-          Meet the members of our team
+          Meet the Core Team
         </h1>
         <h2 className="text-6xl text-center mb-16 bg-gradient-to-r from-cyan-400 to-blue-400 text-transparent bg-clip-text font-bold">
-          Members
+          Team
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {members.map((member, index) => (

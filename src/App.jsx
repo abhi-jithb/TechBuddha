@@ -9,6 +9,8 @@ import Agustine from "./Team/Agustine";
 import Mithil from "./Team/Mithil";
 import Aryan from "./Team/Aryan";
 import Antony from "./Team/Antony";
+import MentorsDisplay from "./Team/Mentor";
+
 
 
 
@@ -39,11 +41,11 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/executives" element={<ExecutivesDisplay />} />
           <Route path="/People" element={<ProfileCard />}  />
-          <Route path="/Portfolio" element={<AchievementsSection />}  />
-          <Route path="/agustine" element={<Agustine/>}  />
-          <Route path="/Antony-Agnel" element={<Antony/>}  />
-          <Route path="/Aryan" element={<Aryan/>}  />
-          <Route path="/Mithil" element={<Mithil/>}  />
+          {/* <Route path="/Portfolio" element={<AchievementsSection />}  /> */}
+          <Route path="/members/:memberId" element={<Agustine />} />
+          <Route path="/mentors/:mentorId" element={<MentorsDisplay />} />
+
+
 
 
           
