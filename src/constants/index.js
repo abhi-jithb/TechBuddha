@@ -76,6 +76,329 @@ const services = [
 
 
 const membersData = {
+  ananthaKrishnan: {
+    id: 'ananthakrishnan',
+    name: 'Anantha Krishnan',
+    title: 'Member',
+    bio: 'Brief bio about Anantha Krishnan...',
+    image: '/AnanthaKrishnan.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/ananthakrishnan',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+abhijayPrakash: {
+    id: 'abhijayprakash',
+    name: 'Abhijay Prakash',
+    title: 'Member',
+    bio: 'Brief bio about Abhijay Prakash...',
+    image: '/AbhijayPrakash.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/abhijayprakash',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+sakethSPai: {
+    id: 'sakethspai',
+    name: 'Saketh S. Pai',
+    title: 'Member',
+    bio: 'Brief bio about Saketh S. Pai...',
+    image: '/Saketh.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/sakethspai',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 8,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '92.6%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          // { id: 3, label: 'B.Tech', icon: 'Medal', grade: '8' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+evinJoseph: {
+    id: 'evinjoseph',
+    name: 'Evin Joseph',
+    title: 'Member',
+    bio: 'Brief bio about Evin Joseph...',
+    image: '/EvinJoseph.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/evin-joseph-759a29295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+saranya: {
+    id: 'saranya',
+    name: 'Saranya Ramadasan',
+    title: 'Member',
+    bio: 'Brief bio about Saranya Ramadasan...',
+    image: '/SaranyaRamadasan.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/saranya-ramadasan-444870291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+amalBiju: {
+    id: 'amalbiju',
+    name: 'Amal Biju',
+    title: 'Member',
+    bio: 'Brief bio about Amal Biju...',
+    image: '/AmalBiju.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/amalbiju',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+sadhnanSamsudheen: {
+    id: 'sadhnansamsudheen',
+    name: 'Sadhnan Samsudheen',
+    title: 'Member',
+    bio: 'Brief bio about Sadhnan Samsudheen...',
+    image: '/SadhnanSamsudheen.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/sadhnan-shameem-966343296?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+
+   rajeev: {
+    id: 'rajeevmartin',
+    name: 'Rajeev Martin',
+    title: 'CFO',
+    bio: 'Lorem ipsum dolor sit amet...',
+    image: '/Ranjeev.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/rajeev-martin-46525b27?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+    quote: {
+      text: 'Lorem ipsum dolor sit amet...',
+      author: 'Steve Jobs',
+      role: 'Co-founder of Apple Inc.'
+    },
+    organizations: [
+      { id: 1, name: 'IEEE', logo: '/IEEE12010.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.1,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '95%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '92%' },
+          { id: 3, label: 'DIPLOMA', icon: 'Medal', grade: '8.9' },
+          { id: 4, label: 'CURRENT', icon: 'Trophy', grade: '9.1' }
+        ],
+        certificates: [
+          { id: 1, title: 'Web Development', issuer: 'Udemy', date: '2024' },
+          { id: 2, title: 'Cloud Computing', issuer: 'AWS', date: '2024' },
+          { id: 3, title: 'Machine Learning', issuer: 'Coursera', date: '2023' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
   agustine: {
     id: 'agustine',
     name: 'Agustine',

@@ -4,13 +4,22 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import { motion } from "framer-motion";
-
 import "react-vertical-timeline-component/style.min.css";
-
 import { styles } from "../styles";
 import { experiences } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
+
+const customTimelineStyles = {
+  '.vertical-timeline::before': {
+    background: '#232631',
+    width: '2px'
+  },
+  '.vertical-timeline-element-content': {
+    boxShadow: 'none',
+    borderBottom: '2px solid #1d1836'
+  }
+};
 
 const ExperienceCard = ({ experience }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -20,8 +29,7 @@ const ExperienceCard = ({ experience }) => {
       setCurrentImageIndex((prevIndex) =>
         (prevIndex + 1) % experience.images.length
       );
-    }, experience.imageChangeSpeed || 3000); 
-
+    }, experience.imageChangeSpeed || 3000);
     return () => clearInterval(intervalId);
   }, [experience.images, experience.imageChangeSpeed]);
 
@@ -30,8 +38,10 @@ const ExperienceCard = ({ experience }) => {
       contentStyle={{
         background: "#1d1836",
         color: "#fff",
+        boxShadow: 'none',
+        border: 'none'
       }}
-      contentArrowStyle={{ borderRight: "7px solid  #232631" }}
+      contentArrowStyle={{ borderRight: "7px solid #232631" }}
       date={experience.date}
       iconStyle={{ background: experience.iconBg }}
       icon={
@@ -57,7 +67,6 @@ const ExperienceCard = ({ experience }) => {
           </p>
         )}
       </div>
-
       <div className='mt-5 relative w-full h-[200px] overflow-hidden rounded-lg'>
         {experience.images && experience.images.length > 0 && (
           <img
@@ -72,14 +81,26 @@ const ExperienceCard = ({ experience }) => {
 };
 
 const Experience = () => {
+  useEffect(() => {
+    const styleSheet = document.createElement("style");
+    styleSheet.textContent = Object.entries(customTimelineStyles)
+      .map(([selector, rules]) => 
+        `${selector} {${Object.entries(rules)
+          .map(([property, value]) => `${property}: ${value};`)
+          .join('')}}`
+      )
+      .join('');
+    document.head.appendChild(styleSheet);
+    return () => document.head.removeChild(styleSheet);
+  }, []);
+
   return (
     <>
       <motion.div variants={textVariant()}>
-        <p className={`text-center font-thin text-5xl`}>
+        <p className="text-center font-thin text-5xl text-white mb-8">
           Achievements
         </p>
       </motion.div>
-
       <div className='mt-20 flex flex-col'>
         <VerticalTimeline>
           {experiences.map((experience, index) => (

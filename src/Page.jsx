@@ -1,19 +1,30 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Info } from 'lucide-react';
 
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Info, ChevronDown, ChevronUp, Search } from 'lucide-react';
+
+// Import images
 import agustineImg from '/Agustine.jpeg';
 import mithilImg from '/Mithil.jpeg';
 import antonyImg from '/Antony.jpeg';
 import aryanImg from '/Aryan.jpeg';
 import visakhImg from '/Visakh.jpeg';
+import rajeev from '/Ranjeev.jpeg';
+import ak from '/Anandu.jpg';
 
+// Executives data
 const executives = [
   {
-    name: 'Agustine',
+    name: 'Antony Agustine',
     title: 'CEO',
     image: agustineImg,
-    path: '/members/agustine'
+    path: '/members/antonyagustine'
+  },
+  {
+    name: 'Rajeev Martin',
+    title: 'CFO',
+    image: rajeev,
+    path: '/members/rajeevmartin'
   },
   {
     name: 'Mithil',
@@ -22,30 +33,75 @@ const executives = [
     path: '/members/mithil'
   },
   {
+    name: 'Anantha Krishnan',
+    title: 'CTO',
+    image: ak,
+    path: '/members/ananthakrishnan'
+  },
+  {
+    name: 'Agustine',
+    title: 'CAO',
+    image: agustineImg,
+    path: '/members/agustine'
+  },
+  {
     name: 'Antony Agnel',
-    title: 'Chief Officer',
+    title: 'CHO',
     image: antonyImg,
     path: '/members/antony'
   },
   {
+    name: 'Abhijay Prakash',
+    title: 'CSO',
+    image: aryanImg,
+    path: '/members/abhijayPrakash'
+  },
+  {
     name: 'Aryan Soji',
-    title: 'Executive Officer',
+    title: 'CDO',
     image: aryanImg,
     path: '/members/aryan'
   },
 ];
 
-const members = [
+// College members data
+const collegeMembers = [
   {
-    name: 'Visakh K Vasudevan',
-    title: 'Member',
-    image: visakhImg,
-    path: '/members/visakh'
+    collegeName: "CET",
+    members: [
+      { name: "Saranya Ramadasan", role: "Student Representative", image: null, path: '/members/saranya' },
+      // { name: "Eva Green", role: "Design Head", image: null, path: '/members/eva' },
+      // { name: "Frank Miller", role: "Content Lead", image: null, path: '/members/frank' },
+    ]
   },
-  // Add more members here as needed
+  {
+    collegeName: "Muthoot Institute of Science and Technology",
+    members: [
+      { name: "Amal Biju", role: "Student Representative", image: null, path: '/members/amalBiju' },
+      // { name: "Jane Smith", role: "Technical Head", image: null, path: '/members/jane' },
+      // { name: "Mike Johnson", role: "Event Coordinator", image: null, path: '/members/mike' },
+    ]
+  },
+  {
+    collegeName: "Model Engineering College",
+    members: [
+      { name: "Saketh S Pai", role: "CDO-MEC", image: '/Saketh.jpeg', path: '/members/sakethSPai' },
+      { name: "Evin Joseph", role: "CDO-MEC", image: null, path: '/members/evin-joseph' },
+      // { name: "Mike Johnson", role: "Event Coordinator", image: null, path: '/members/mike' },
+    ]
+  },
+  {
+    collegeName: "CUSAT",
+    members: [
+      { name: "Sadhnan Shameem", role: "Student Representative", image: null, path: '/members/sadhnanSamsudheen' },
+      // { name: "Bob Wilson", role: "Marketing Head", image: null, path: '/members/bob' },
+      // { name: "Carol White", role: "Technical Coordinator", image: null, path: '/members/carol' },
+    ]
+  },
+ 
 ];
 
-const ProfileCard = ({ name, title, image, path }) => (
+const ProfileCard = ({ name, title, role, image, path }) => (
   <div className="bg-slate-50 rounded-3xl py-16 p-6 flex flex-col items-center space-y-4 transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
     <div className="w-32 h-32 rounded-full bg-slate-200 border-2 border-slate-300 overflow-hidden">
       {image ? (
@@ -67,7 +123,7 @@ const ProfileCard = ({ name, title, image, path }) => (
     </div>
     <div className="text-center">
       <h3 className="font-bold text-black text-xl mb-1">{name}</h3>
-      <p className="text-lg text-slate-600">{title}</p>
+      <p className="text-lg text-slate-600">{title || role}</p>
     </div>
     <Link
       to={path}
@@ -78,7 +134,51 @@ const ProfileCard = ({ name, title, image, path }) => (
   </div>
 );
 
+
+const MembersList = ({ college, isOpen, onToggle }) => {
+  return (
+    <div className="bg-slate-800 rounded-lg overflow-hidden mb-4 w-4/5 mx-auto">
+      <button
+        onClick={onToggle}
+        className="w-full px-6 py-4 flex justify-between items-center hover:bg-slate-700 transition-colors"
+      >
+        <h3 className="text-xl font-semibold text-white">{college.collegeName}</h3>
+        {isOpen ? (
+          <ChevronUp className="w-6 h-6 text-slate-300" />
+        ) : (
+          <ChevronDown className="w-6 h-6 text-slate-300" />
+        )}
+      </button>
+      {isOpen && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 bg-slate-700">
+          {college.members.map((member, index) => (
+            <ProfileCard key={`${college.collegeName}-${index}`} {...member} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default function ExecutivesDisplay() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [openColleges, setOpenColleges] = useState({});
+
+  const toggleCollege = (collegeName) => {
+    setOpenColleges(prev => ({
+      ...prev,
+      [collegeName]: !prev[collegeName]
+    }));
+  };
+
+  const filteredColleges = collegeMembers.filter(college => {
+    const collegeNameMatch = college.collegeName.toLowerCase().includes(searchTerm.toLowerCase());
+    const membersMatch = college.members.some(member => 
+      member.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    return collegeNameMatch || membersMatch;
+  });
+
   return (
     <div className="min-h-screen bg-slate-900 p-8">
       <div className="space-y-20">
@@ -102,14 +202,33 @@ export default function ExecutivesDisplay() {
         {/* Members Section */}
         <div className="space-y-8">
           <div className="text-center">
-            <h2 className="text-4xl font-semibold text-slate-300">
+            <h2 className="text-4xl font-semibold text-slate-300 mb-8">
               MEMBERS
             </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {members.map((member, index) => (
-              <ProfileCard key={`member-${index}`} {...member} />
-            ))}
+            
+            {/* Search Bar */}
+            <div className="relative w-4/5 mx-auto mb-8">
+              <input
+                type="text"
+                placeholder="Search colleges or members..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full px-6 py-3 rounded-lg bg-slate-800 text-white border border-slate-600 focus:outline-none focus:border-blue-400 pl-12"
+              />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5" />
+            </div>
+
+            {/* Colleges List */}
+            <div className="space-y-4">
+              {filteredColleges.map((college) => (
+                <MembersList
+                  key={college.collegeName}
+                  college={college}
+                  isOpen={openColleges[college.collegeName]}
+                  onToggle={() => toggleCollege(college.collegeName)}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

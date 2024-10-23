@@ -21,9 +21,9 @@ const Home = () => (
     <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
       <Hero />
     </div>
+    <Works />
     <About />
     <Experience />
-    <Works />
     <Feedbacks />
     <EnquiryForm/>
     <Footer/>

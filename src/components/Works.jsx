@@ -4,7 +4,8 @@ import agustine from '/Agustine.jpeg';
 import mithil from '/Mithil.jpeg';
 import antony from '/Antony.jpeg';
 import aryan from '/Aryan.jpeg';
-
+import ak from '/Anandu.jpg'
+import rajeev from '/Ranjeev.jpeg'
 const TeamMember = ({ name, role, image }) => (
   <div className="rounded-3xl bg-navy-900/80 p-8 border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300">
     <div className="w-full h-48 rounded-lg bg-navy-800 mb-4 overflow-hidden">
@@ -22,9 +23,14 @@ const TeamMember = ({ name, role, image }) => (
 export default function TeamSection() {
   const members = [
     {
-      name: 'Augustine Vakumcheri',
+      name: 'Antony Augustine',
       role: 'Chief Executive Officer',
       image: agustine
+    },
+    {
+      name: 'Rajeev Martin',
+      role: 'Chief Financial Officer',
+      image: rajeev
     },
     {
       name: 'Mithil',
@@ -32,14 +38,9 @@ export default function TeamSection() {
       image: mithil
     },
     {
-      name: 'Antony Agnel',
-      role: 'Chief Officer',
-      image: antony
-    },
-    {
-      name: 'Aryan Soji',
-      role: 'Chief Executive Officer',
-      image: aryan
+      name: 'Anantha Krishnan',
+      role: 'Chief Technical Officer',
+      image: ak
     },
   ];
 
