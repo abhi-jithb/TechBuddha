@@ -57,22 +57,33 @@ const services = [
   {
     title: "App Development",
     icon: backend,
+    personImage: "/Jacob.jpg", // Add your image path
+    name: "Jacob George",
+    linkedIn: "https://www.linkedin.com/in/jacobgeorgea/overlay/contact-info/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BWQr3PVwDSsqH4n6rshTUWA%3D%3D",
   },
   {
     title: "Medical",
     icon: web,
+    personImage: "",
+    description:"AttokaranPhysician , Intensivist and Medical Researcher Queensland, Australia.", 
+    name: "Dr. Antony",
+    linkedIn: "",
   },
   {
     title: "Agriculture",
     icon: mobile,
+    personImage: "/team/agri-lead.jpg", // Add your image path
+    name: "GUIDE",
+    linkedIn: "",
   },
- 
   {
     title: "Industrial",
     icon: creator,
+    personImage: "/team/industrial-lead.jpg", // Add your image path
+    name: "GUIDE",
+    linkedIn: "https://linkedin.com/in/emmarichards",
   },
 ];
-
 
 
 const membersData = {
@@ -396,7 +407,7 @@ sadhnanSamsudheen: {
     }
   },
 
-   rajeev: {
+   rajeevmartin: {
     id: 'rajeevmartin',
     name: 'Rajeev Martin',
     title: 'CFO',
@@ -486,6 +497,7 @@ sadhnanSamsudheen: {
     title: 'CTO',
     bio: 'Mithil is the technology lead...',
     image: '/Mithil.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/k-l-mithil-664a8a2a7/overlay/contact-info/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BehKg6HBsRYmHoc6LbO%2FzoQ%3D%3D',
     quote: {
       text: 'Technology is best when it brings people together...',
       author: 'Matt Mullenweg',
@@ -599,12 +611,13 @@ sadhnanSamsudheen: {
       
     }
   },
-  antony: {
+  antonyagustine: {
     id: 'antony',
     name: 'Antony',
     title: 'CFO',
     bio: 'Antony oversees financial operations...',
     image: '/Antony.jpeg',
+    linkedinUrl:'https://www.linkedin.com/in/rajeev-martin-46525b27?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
     quote: {
       text: 'Money is a terrible master but an excellent servant...',
       author: 'P.T. Barnum',

@@ -25,7 +25,7 @@ export default function TeamSection() {
     {
       name: 'Antony Augustine',
       role: 'Chief Executive Officer',
-      image: agustine
+      image: rajeev
     },
     {
       name: 'Rajeev Martin',

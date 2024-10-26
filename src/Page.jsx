@@ -12,12 +12,13 @@ import visakhImg from '/Visakh.jpeg';
 import rajeev from '/Ranjeev.jpeg';
 import ak from '/Anandu.jpg';
 
+
 // Executives data
 const executives = [
   {
     name: 'Antony Agustine',
     title: 'CEO',
-    image: agustineImg,
+    image: rajeev,
     path: '/members/antonyagustine'
   },
   {
@@ -64,14 +65,12 @@ const executives = [
   },
 ];
 
-// College members data
 const collegeMembers = [
   {
     collegeName: "CET",
     members: [
       { name: "Saranya Ramadasan", role: "Student Representative", image: null, path: '/members/saranya' },
-      // { name: "Eva Green", role: "Design Head", image: null, path: '/members/eva' },
-      // { name: "Frank Miller", role: "Content Lead", image: null, path: '/members/frank' },
+      { name: "Sebastin Varghese", role: "", image: null, path: '/members/sebastinVarghese' }
     ]
   },
   {
@@ -98,7 +97,66 @@ const collegeMembers = [
       // { name: "Carol White", role: "Technical Coordinator", image: null, path: '/members/carol' },
     ]
   },
- 
+  {
+    collegeName: "TOCH",
+    members: [
+      { name: "Abel", role: "", image: null, path: '/members/abel' }
+    ]
+  },
+  {
+    collegeName: "FISAT",
+    members: [
+      { name: "Austen Manavalan", role: "", image: null, path: '/members/austenManavalan' }
+    ]
+  },
+  {
+    collegeName: "NIT",
+    members: [
+      { name: "Mohit Tyagi", role: "", image: null, path: '/members/mohitTyagi' }
+    ]
+  },
+  {
+    collegeName: "ADISHANKARA",
+    members: [
+      { name: "Aryan Soji", role: "", image: null, path: '/members/aryanSoji' }
+    ]
+  },
+  {
+    collegeName: "TKM",
+    members: [
+      { name: "Sudeep Sunil", role: "", image: null, path: '/members/sudeepSunil' }
+    ]
+  },
+  {
+    collegeName: "NIT Bhopal",
+    members: [
+      { name: "Donal Jose", role: "", image: null, path: '/members/donalJose' }
+    ]
+  },
+  {
+    collegeName: "VIT",
+    members: [
+      { name: "Anjala", role: "", image: null, path: '/members/anjala' }
+    ]
+  },
+  {
+    collegeName: "CHRIST",
+    members: [
+      { name: "Joyal", role: "", image: null, path: '/members/joyal' }
+    ]
+  },
+  {
+    collegeName: "GEC Thrissur",
+    members: [
+      { name: "Joshika", role: "", image: null, path: '/members/joshika' }
+    ]
+  },
+  {
+    collegeName: "KARUNYA",
+    members: [
+      { name: "Nikhil Varghese", role: "", image: null, path: '/members/nikhilVarghese' }
+    ]
+  }
 ];
 
 const ProfileCard = ({ name, title, role, image, path }) => (
