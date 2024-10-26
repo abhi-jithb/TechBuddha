@@ -276,6 +276,45 @@ saranya: {
       ]
     }
   },
+  DhananjaynathKJ: {
+    id: ' Dhananjaynath K J',
+    name: 'Dhananjaynath K J',
+    title: 'Member',
+    bio: 'Brief bio about Abhijay Prakash...',
+    image: '/Dhnan.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/dhananjaynath-k-j-50845831b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 7.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: ':90 %' },
+          { id: 2, label: '12th', icon: 'Award', grade: '92.08%' },
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
 amalBiju: {
     id: 'amalbiju',
     name: 'Amal Biju',
@@ -321,7 +360,7 @@ sadhnanSamsudheen: {
     name: 'Sadhnan Samsudheen',
     title: 'Member',
     bio: 'Brief bio about Sadhnan Samsudheen...',
-    image: '/SadhnanSamsudheen.jpeg',
+    image: '/Sadhnan.jpeg',
     linkedinUrl: 'https://www.linkedin.com/in/sadhnan-shameem-966343296?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
     quote: {
       text: 'Inspirational quote...',
@@ -333,11 +372,11 @@ sadhnanSamsudheen: {
     ],
     achievements: {
       education: {
-        currentCGPA: 9.5,
+        currentCGPA: 9,
         milestones: [
-          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
-          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
-          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '91.1%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '87.6%' },
+          // { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
         ],
         certificates: [
           { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },

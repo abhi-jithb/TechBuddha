@@ -87,13 +87,13 @@ const collegeMembers = [
     members: [
       { name: "Saketh S Pai", role: "CDO-MEC", image: '/Saketh.jpeg', path: '/members/sakethSPai' },
       { name: "Evin Joseph", role: "CDO-MEC", image: null, path: '/members/evin-joseph' },
-      // { name: "Mike Johnson", role: "Event Coordinator", image: null, path: '/members/mike' },
+      { name: "Dhananjaynath K J", role: "", image: '/Dhnan.jpeg', path: '/members/DhananjaynathKJ' },
     ]
   },
   {
     collegeName: "CUSAT",
     members: [
-      { name: "Sadhnan Shameem", role: "Student Representative", image: null, path: '/members/sadhnanSamsudheen' },
+      { name: "Sadhnan Shameem", role: "Student Representative", image: '/Sadhnan.jpeg', path: '/members/sadhnanSamsudheen' },
       // { name: "Bob Wilson", role: "Marketing Head", image: null, path: '/members/bob' },
       // { name: "Carol White", role: "Technical Coordinator", image: null, path: '/members/carol' },
     ]
