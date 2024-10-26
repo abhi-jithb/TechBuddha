@@ -6,9 +6,6 @@ import AchievementsSection from "./Portfolio";
 import EnquiryForm from "./components/Contact";
 import Footer from "./components/Footer";
 import Agustine from "./Team/Agustine";
-import Mithil from "./Team/Mithil";
-import Aryan from "./Team/Aryan";
-import Antony from "./Team/Antony";
 import MentorsDisplay from "./Team/Mentor";
 
 
