@@ -3,9 +3,10 @@ import React from 'react';
 import agustine from '/Agustine.jpeg';
 import mithil from '/Mithil.jpeg';
 import antony from '/Antony.jpeg';
+import aantony from '/aantony.jpeg';
 import aryan from '/Aryan.jpeg';
 import ak from '/Anandu.jpg'
-import rajeev from '/Ranjeev.jpeg'
+import rajeev from '/rajajeev.png'
 const TeamMember = ({ name, role, image }) => (
   <div className="rounded-3xl bg-navy-900/80 p-8 border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300">
     <div className="w-full h-48 rounded-lg bg-navy-800 mb-4 overflow-hidden">
@@ -25,7 +26,7 @@ export default function TeamSection() {
     {
       name: 'Antony Augustine',
       role: 'Chief Executive Officer',
-      image: rajeev
+      image: aantony
     },
     {
       name: 'Rajeev Martin',

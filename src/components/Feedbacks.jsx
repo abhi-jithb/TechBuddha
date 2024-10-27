@@ -41,7 +41,7 @@ export default function TestimonialsSection() {
 
   return (
     <div className="min-h-screen bg-navy-950 p-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto"> 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 mb-16">
           <div>
             <h2 className="text-5xl font-semibold leading-tight">

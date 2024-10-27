@@ -23,7 +23,7 @@ const Hero = () => {
           transition={{ duration: 0.5 }}
           className="flex flex-col sm:flex-row items-center sm:items-baseline gap-1 sm:gap-3"
         >
-          <span className="text-2xl sm:text-3xl font-bold">35+</span>
+          <span className="text-2xl sm:text-3xl font-bold">75+</span>
           <span className="text-[#4BFFA5] text-xs sm:text-sm text-center sm:text-left">ACTIVE<br className="sm:hidden" /> MEMBERS</span>
         </motion.div>
 
@@ -33,7 +33,7 @@ const Hero = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex flex-col sm:flex-row items-center sm:items-baseline gap-1 sm:gap-3"
         >
-          <span className="text-2xl sm:text-3xl font-bold">230+</span>
+          <span className="text-2xl sm:text-3xl font-bold">7+</span>
           <span className="text-[#4BFFA5] text-xs sm:text-sm text-center sm:text-left">PROJECTS<br className="sm:hidden" /> COMPLETED</span>
         </motion.div>
 
@@ -43,7 +43,7 @@ const Hero = () => {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center sm:items-baseline gap-1 sm:gap-3"
         >
-          <span className="text-2xl sm:text-3xl font-bold">₹1 LAKH+</span>
+          <span className="text-2xl sm:text-3xl font-bold">10+</span>
           <span className="text-[#4BFFA5] text-xs sm:text-sm text-center sm:text-left">INVESTORS</span>
         </motion.div>
       </div>

@@ -65,8 +65,8 @@ const services = [
     title: "Medical",
     icon: web,
     personImage: "/dranto.jpeg",
-    description:"AttokaranPhysician , Intensivist and Medical Researcher Queensland, Australia.", 
-    name: "Dr. Antony",
+    description:"Physician , Intensivist and Medical Researcher Queensland, Australia.", 
+    name: "Dr. Antony Attokaran",
     linkedIn: "",
   },
   {
@@ -246,6 +246,92 @@ const membersData = {
       ]
     }
   },
+
+  
+  adithyavijay: {
+    id: 'aditya',
+    name: 'Adithya vijay',
+    title: 'Member',
+    bio: 'Brief bio about Abhijay Prakash...',
+    image: '/aditya.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/adithya-vijay-305768245/',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+
+
+  aryansoji: {
+    id: 'aryan',
+    name: 'Aryan Soji',
+    title: 'Member',
+    bio: 'Brief bio about Abhijay Prakash...',
+    image: '/Aryan.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/aryansoji/',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+
+
 abhijayPrakash: {
     id: 'abhijayprakash',
     name: 'Abhijay Prakash',
@@ -730,6 +816,52 @@ sadhnanSamsudheen: {
       
     }
   },
+
+  rohit: {
+    id: 'rohit',
+    name: 'ROHIT KALARIKAL',
+    title: 'MEC REPRESENTATIVE',
+    bio: 'Aryan Soju is the operational mastermind...',
+    image: '/Rohit.png',
+    linkedinUrl: 'https://www.linkedin.com/in/rohit-kalarickal-868085255/',
+    quote: {
+      text: 'Efficiency is doing things right; effectiveness is doing the right things...',
+      author: 'Peter Drucker',
+      role: 'Management Consultant'
+    },
+    organizations: [
+      { id: 1, name: 'Operations Club', logo: '/OperationsClub.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.02,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '95.8%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '89%' },
+          // { id: 3, label: 'BBA', icon: 'Medal', grade: '8.8' }
+        ],
+        certificates: [
+          { id: 1, title: 'Operations Management', issuer: 'Coursera', date: '2023' },
+          // { id: 2, title: 'Supply Chain', issuer: 'LinkedIn Learning', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+      
+    }
+  },
+
+
+
+
   antonyagustine: {
     id: 'antony',
     name: 'Antony',
@@ -818,10 +950,11 @@ const experiences = [
     iconBg: "#E6DEDD",
     date: "2024",
     images: [
-      "Hospex1.JPG",
-     "Hospex2.JPG",
-     "Hospex3.JPG",
-     "Hospex4.JPG",
+     "Hospexx1.jpeg",
+    "Hospexx2.jpeg",
+    "Hospexx3.jpeg",
+    "Hospexx4.jpeg",
+    "Hospexx5.jpeg",
     ],
   },
   {
@@ -830,11 +963,10 @@ const experiences = [
     iconBg: "#E6DEDD",
     date: "2024",
     images: [
-      "Hospexx1.jpeg",
-      "Hospexx2.jpeg",
-      "Hospexx3.jpeg",
-      "Hospexx4.jpeg",
-      "Hospexx5.jpeg",
+      "Hospex1.JPG",
+      "Hospex2.JPG",
+      "Hospex3.JPG",
+      "Hospex4.JPG",
       
     ],
   },
