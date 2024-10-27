@@ -84,9 +84,12 @@ const collegeMembers = [
   {
     collegeName: "Model Engineering College",
     members: [
-      { name: "Saketh S Pai", role: "CDO-MEC", image: '/Saketh.jpeg', path: '/members/sakethSPai' },
-      { name: "Evin Joseph", role: "CDO-MEC", image: null, path: '/members/evin-joseph' },
-      { name: "Dhananjaynath K J", role: "", image: '/Dhnan.jpeg', path: '/members/DhananjaynathKJ' },
+      { name: "Saketh S Pai", role: "CDO", image: '/Saketh.jpeg', path: '/members/sakethSPai' },
+      { name: "Evin Joseph", role: "CAO", image: '/evin.jpeg', path: '/members/evin-joseph' },
+      { name: "Dhananjaynath K J", role: "CSO", image: '/Dhnan.jpeg', path: '/members/DhananjaynathKJ' },
+      { name: "ALEXANDER BIIJU ISSAC", role: "CHO", image: '/alexander.jpeg', path: '/members/alexander' },
+      { name: "Aravind", role: "XPayBack & Lemont representative", image: '/aravind.jpeg', path: '/members/aravind' },
+      { name: "Hussain", role: "", image: '/hussain.jpeg', path: '/members/hussain' }
     ]
   },
   {

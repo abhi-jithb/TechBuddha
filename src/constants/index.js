@@ -64,7 +64,7 @@ const services = [
   {
     title: "Medical",
     icon: web,
-    personImage: "",
+    personImage: "/dranto.jpeg",
     description:"AttokaranPhysician , Intensivist and Medical Researcher Queensland, Australia.", 
     name: "Dr. Antony",
     linkedIn: "",
@@ -94,6 +94,125 @@ const membersData = {
     bio: 'Brief bio about Anantha Krishnan...',
     image: '/AnanthaKrishnan.jpeg',
     linkedinUrl: 'https://www.linkedin.com/in/ananthakrishnan',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+  aravind: {
+    id: 'aravind',
+    name: 'Aravind',
+    title: 'Member',
+    bio: 'Brief bio about Anantha Krishnan...',
+    image: '/aravind.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/muhammedbilalmn/overlay/contact-info/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3BOHfsjz3oRaikGKR%2F9KtHSA%3D%3D',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 9.5,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '96%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '93%' },
+          { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+  hussain: {
+    id: 'hussain',
+    name: 'Hussain',
+    title: 'Member',
+    bio: 'Brief bio about Anantha Krishnan...',
+    image: '/hussain.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/hussain-p-s-b4b0a6255?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
+    quote: {
+      text: 'Inspirational quote...',
+      author: 'Famous Person',
+      role: 'Author Role'
+    },
+    organizations: [
+      { id: 1, name: 'Organization Name', logo: '/organizationLogo.png' }
+    ],
+    achievements: {
+      education: {
+        currentCGPA: 8.98,
+        milestones: [
+          { id: 1, label: '10th', icon: 'BookOpen', grade: '97%' },
+          { id: 2, label: '12th', icon: 'Award', grade: '96%' },
+          // { id: 3, label: 'B.Tech', icon: 'Medal', grade: '9.5' }
+        ],
+        certificates: [
+          { id: 1, title: 'Full Stack Development', issuer: 'Coursera', date: '2023' },
+          { id: 2, title: 'AI & ML', issuer: 'Udemy', date: '2024' }
+        ]
+      },
+      startups: [
+        {
+          id: 1,
+          title: 'MEDICAL',
+          icon: 'Microscope',
+          description: 'Healthcare innovations and medical technology solutions',
+          videoId: 'dQw4w9WgXcQ',
+          details: 'Revolutionizing healthcare through innovative medical technologies...'
+        }
+      ]
+    }
+  },
+  alexander: {
+    id: 'alexander',
+    name: 'Alexander Biju Issac',
+    title: 'Member',
+    bio: 'Brief bio about ...',
+    image: '/alexander.jpeg',
     quote: {
       text: 'Inspirational quote...',
       author: 'Famous Person',
@@ -212,7 +331,7 @@ evinJoseph: {
     name: 'Evin Joseph',
     title: 'Member',
     bio: 'Brief bio about Evin Joseph...',
-    image: '/EvinJoseph.jpeg',
+    image: '/evin.jpeg',
     linkedinUrl: 'https://www.linkedin.com/in/evin-joseph-759a29295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
     quote: {
       text: 'Inspirational quote...',
