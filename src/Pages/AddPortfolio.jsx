@@ -154,7 +154,7 @@ export default function UserForm() {
     });
 
     try {
-      const response = await fetch("http://localhost:4000/upload", {
+      const response = await fetch("https://horizon-connect.onrender.com/upload", {
         method: "POST",
         body: data,
       });

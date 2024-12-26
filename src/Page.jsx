@@ -192,7 +192,7 @@ export default function ExecutivesDisplay() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await fetch('http://localhost:4000/members');
+        const response = await fetch('https://horizon-connect.onrender.com/members');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         setMembers(data);
