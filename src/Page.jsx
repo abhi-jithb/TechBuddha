@@ -64,37 +64,88 @@ const ProfileCard = ({ name, title, role, imageUrl, path }) => (
   </div>
 );
 
-const CollegeSection = ({ college, isOpen, onToggle }) => (
-  <div className="bg-slate-800 rounded-lg overflow-hidden mb-6">
-    <button
-      onClick={onToggle}
-      className="w-full px-8 py-6 flex justify-between items-center hover:bg-slate-700 transition-colors"
-    >
-      <h3 className="text-2xl font-semibold text-white">{college.collegename}</h3>
-      {isOpen ? (
-        <ChevronUp className="w-8 h-8 text-slate-300" />
-      ) : (
-        <ChevronDown className="w-8 h-8 text-slate-300" />
-      )}
-    </button>
-    
-    {isOpen && (
-      <div className="p-8 bg-slate-700">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {college.members?.map((member, index) => (
+const CollegeSection = ({ college, isOpen, onToggle }) => {
+  const headOfCollege = college.members.find(
+    (member) => member.role === "Head"
+  );
+  const otherMembers = college.members.filter(
+    (member) => member.role !== "Head"
+  );
+
+  const groupedMembers = otherMembers.reduce((acc, member) => {
+    const year = member.year || "Others"; 
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(member);
+    return acc;
+  }, {});
+
+  // Define a custom order for sorting
+  const yearOrder = ["4th", "3rd", "2nd", "1st", "Others"];
+  const sortedYears = Object.keys(groupedMembers).sort(
+    (a, b) => yearOrder.indexOf(b) - yearOrder.indexOf(a)
+  );
+  return (
+    <div className="bg-slate-800 rounded-lg overflow-hidden mb-6">
+      <button
+        onClick={onToggle}
+        className="w-full px-8 py-6 flex justify-between items-center hover:bg-slate-700 transition-colors"
+      >
+        <h3 className="text-2xl font-semibold text-white">
+          {college.collegename}
+        </h3>
+        <div className="flex items-center gap-4">
+          {headOfCollege && (
             <ProfileCard
-              key={index}
-              name={member.fullname}
-              role={member.currentPositions?.[0]}
-              imageUrl={member.imageUrl}
-              path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-')}`}
+              key={headOfCollege.fullname}
+              name={headOfCollege.fullname}
+              role={headOfCollege.role}
+              imageUrl={headOfCollege.imageUrl}
+              path={`/members/${headOfCollege.fullname
+                .toLowerCase()
+                .replace(/\s+/g, "-")}`}
             />
+          )}
+          {isOpen ? (
+            <ChevronUp className="w-8 h-8 text-slate-300" />
+          ) : (
+            <ChevronDown className="w-8 h-8 text-slate-300" />
+          )}
+        </div>
+      </button>
+
+      {isOpen && (
+        <div className="p-8 bg-slate-700 space-y-8">
+          {sortedYears.map((year) => (
+            <div key={year} className="space-y-4">
+              <h4 className="text-xl font-bold text-slate-300 mb-4">
+                {year} Year
+              </h4>
+              <div className="flex flex-wrap gap-4">
+                {groupedMembers[year].map((member) => (
+                  <div
+                    key={member.fullname}
+                    className="w-1/4 max-w-xs flex-shrink-0"
+                  >
+                    <ProfileCard
+                      name={member.fullname}
+                      role={member.currentPositions}
+                      imageUrl={member.imageUrl}
+                      path={`/members/${member.fullname
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
-      </div>
-    )}
-  </div>
-);
+      )}
+    </div>
+  );
+};
+
+
 
 const CategoryFilter = ({ activeFilter, onFilterChange }) => {
   const categories = ['college', 'development', 'marketing', 'job'];
@@ -160,23 +211,22 @@ export default function ExecutivesDisplay() {
     return matchesSearch && member.userType === activeFilter;
   });
 
-  // Group colleges and their members
-  const colleges = activeFilter === 'college' 
-    ? filteredMembers.reduce((acc, member) => {
-        if (member.collegename) {
-          if (!acc[member.collegename]) {
-            acc[member.collegename] = {
-              collegename: member.collegename,
-              members: []
-            };
-          }
-          if (member.members) {
-            acc[member.collegename].members = member.members;
-          }
+
+
+    const colleges = activeFilter === 'college' 
+  ? filteredMembers.reduce((acc, member) => {
+      if (member.collegename) {
+        if (!acc[member.collegename]) {
+          acc[member.collegename] = {
+            collegename: member.collegename,
+            members: []
+          };
         }
-        return acc;
-      }, {})
-    : {};
+        acc[member.collegename].members.push(member); 
+      }
+      return acc;
+    }, {})
+  : {};
 
   if (loading) {
     return (
@@ -236,7 +286,6 @@ export default function ExecutivesDisplay() {
 
             <div className="max-w-6xl mx-auto">
               {activeFilter === 'college' ? (
-                // Display colleges in expandable sections
                 Object.values(colleges).map((college, index) => (
                   <CollegeSection
                     key={index}
@@ -246,7 +295,6 @@ export default function ExecutivesDisplay() {
                   />
                 ))
               ) : (
-                // Display individual cards for other categories
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredMembers.map((member, index) => (
                     <ProfileCard
