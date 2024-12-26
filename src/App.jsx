@@ -10,6 +10,9 @@ import Mithil from "./Team/Mithil";
 import Aryan from "./Team/Aryan";
 import Antony from "./Team/Antony";
 import MentorsDisplay from "./Team/Mentor";
+import UserForm from "./Pages/AddPortfolio";
+import { Toaster } from "react-hot-toast";
+
 
 
 
@@ -34,13 +37,16 @@ const Home = () => (
 
 const App = () => {
   return (
+    
     <BrowserRouter>
+    <Toaster />
       <div className='relative z-0 bg-primary'>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/executives" element={<ExecutivesDisplay />} />
           <Route path="/People" element={<ProfileCard />}  />
+          <Route path="/AddPortfolio" element={<UserForm />}  />
           {/* <Route path="/Portfolio" element={<AchievementsSection />}  /> */}
           <Route path="/members/:memberId" element={<Agustine />} />
           <Route path="/mentors/:mentorId" element={<MentorsDisplay />} />
@@ -53,6 +59,7 @@ const App = () => {
         </Routes>
       </div>
     </BrowserRouter>
+ 
   );
 }
 
