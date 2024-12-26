@@ -64,55 +64,68 @@ const ProfileCard = ({ name, title, role, imageUrl, path }) => (
   </div>
 );
 
+
+
 const CollegeSection = ({ college, isOpen, onToggle }) => {
   const headOfCollege = college.members.find(
-    (member) => member.role === "Head"
+    (member) => member.currentPositions[0] === "Head"
   );
   const otherMembers = college.members.filter(
-    (member) => member.role !== "Head"
+    (member) => member.currentPositions[0] !== "Head"
   );
-
   const groupedMembers = otherMembers.reduce((acc, member) => {
-    const year = member.year || "Others"; 
+    const year = member.year || "Others";
     if (!acc[year]) acc[year] = [];
     acc[year].push(member);
     return acc;
   }, {});
 
-  // Define a custom order for sorting
   const yearOrder = ["4th", "3rd", "2nd", "1st", "Others"];
   const sortedYears = Object.keys(groupedMembers).sort(
     (a, b) => yearOrder.indexOf(b) - yearOrder.indexOf(a)
   );
+
   return (
     <div className="bg-slate-800 rounded-lg overflow-hidden mb-6">
       <button
         onClick={onToggle}
         className="w-full px-8 py-6 flex justify-between items-center hover:bg-slate-700 transition-colors"
       >
-        <h3 className="text-2xl font-semibold text-white">
-          {college.collegename}
-        </h3>
-        <div className="flex items-center gap-4">
+        <div className="flex w-full justify-between items-center">
+          <h3 className="text-2xl font-semibold text-white">
+            {college.collegename}
+          </h3>
           {headOfCollege && (
-            <ProfileCard
-              key={headOfCollege.fullname}
-              name={headOfCollege.fullname}
-              role={headOfCollege.role}
-              imageUrl={headOfCollege.imageUrl}
-              path={`/members/${headOfCollege.fullname
-                .toLowerCase()
-                .replace(/\s+/g, "-")}`}
-            />
-          )}
-          {isOpen ? (
-            <ChevronUp className="w-8 h-8 text-slate-300" />
-          ) : (
-            <ChevronDown className="w-8 h-8 text-slate-300" />
+            <div className="w-1/3">
+              <div className="bg-slate-50 rounded-xl py-8 px-4 flex flex-col items-center space-y-2 transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
+                <div className="w-20 h-20 rounded-full bg-slate-200 border border-slate-300 overflow-hidden">
+                  {headOfCollege.imageUrl ? (
+                    <img src={headOfCollege.imageUrl} alt={headOfCollege.fullname} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <svg viewBox="0 0 24 24" className="w-12 h-12 text-slate-400">
+                        <path fill="currentColor" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <div className="text-center">
+                  <h3 className="font-semibold text-black text-lg mb-0.5">{headOfCollege.fullname}</h3>
+                  <p className="text-sm text-slate-600">{headOfCollege.currentPositions}</p>
+                </div>
+                <Link to={`/members/${headOfCollege.fullname.toLowerCase().replace(/\s+/g, "-")}`} className="rounded-full p-2 hover:bg-slate-200 transition-colors group">
+                  <Info className="w-6 h-6 text-black group-hover:text-blue-500 transition-colors" />
+                </Link>
+              </div>
+            </div>
           )}
         </div>
+        {isOpen ? (
+          <ChevronUp className="w-8 h-8 text-slate-300" />
+        ) : (
+          <ChevronDown className="w-8 h-8 text-slate-300" />
+        )}
       </button>
-
       {isOpen && (
         <div className="p-8 bg-slate-700 space-y-8">
           {sortedYears.map((year) => (
@@ -145,27 +158,26 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
   );
 };
 
-
-
 const CategoryFilter = ({ activeFilter, onFilterChange }) => {
   const categories = ['college', 'development', 'marketing', 'job'];
   
   return (
-    <div className="flex justify-center gap-4 mb-8">
-      {categories.map((category) => (
-        <button
-          key={category}
-          onClick={() => onFilterChange(category)}
-          className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-            activeFilter === category
-              ? 'bg-blue-500 text-white shadow-lg'
-              : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
-          }`}
-        >
-          {category.charAt(0).toUpperCase() + category.slice(1)}
-        </button>
-      ))}
-    </div>
+    <div className="grid grid-cols-2 grid-rows-auto gap-x-4 gap-y-4 md:flex md:justify-center gap-4 mb-8">
+    {categories.map((category) => (
+      <button
+        key={category}
+        onClick={() => onFilterChange(category)}
+        className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+          activeFilter === category
+            ? 'bg-blue-500 text-white shadow-lg'
+            : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+        }`}
+      >
+        {category.charAt(0).toUpperCase() + category.slice(1)}
+      </button>
+    ))}
+  </div>
+  
   );
 };
 
