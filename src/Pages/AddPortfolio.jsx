@@ -154,7 +154,7 @@ export default function UserForm() {
     });
 
     try {
-      const response = await fetch("https://horizon-connect.onrender.com/upload", {
+      const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/upload", {
         method: "POST",
         body: data,
       });
