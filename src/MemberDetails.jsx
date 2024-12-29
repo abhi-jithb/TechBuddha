@@ -1,7 +1,7 @@
 import React from 'react';
 import { Linkedin } from 'lucide-react';
 
-const MemberProfileSection = ({ name, role, bio, image, linkedinUrl, quote, volunteeringOrgs }) => {
+const MemberProfileSection = ({ name, role, bio, image, linkedinUrl, author, quote, volunteeringOrgs }) => {
   return (
     <div className="bg-gradient-to-b from-gray-900 text-white py-16">
       <div className="max-w-6xl mx-auto mt-6 px-8">
@@ -33,19 +33,18 @@ const MemberProfileSection = ({ name, role, bio, image, linkedinUrl, quote, volu
             </div>
           </div>
 
-          {/* Additional Information */}
           <div className="space-y-8">
-            {/* Quote Section */}
-            {quote && (
-              <div className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700">
-                <div className="flex items-start space-x-4">
-                  <div className="text-5xl text-cyan-400">"</div>
-                  <div>
-                    <p className="text-lg text-gray-300 mb-4">{quote}</p>
-                  </div>
-                </div>
-              </div>
-            )}
+          {(quote && author) && (
+  <div className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700">
+    <div className="flex items-start space-x-4">
+      <div className="text-5xl text-cyan-400">"</div>
+      <div className="flex-1">
+        <p className="text-lg text-gray-300 mb-4">{quote}</p>
+        <p className="text-sm text-gray-400 text-right italic">- {author}</p>
+      </div>
+    </div>
+  </div>
+)}
 
             {/* Volunteering Organizations */}
             {volunteeringOrgs && volunteeringOrgs.length > 0 && (

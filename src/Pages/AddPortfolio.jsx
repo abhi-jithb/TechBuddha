@@ -6,7 +6,6 @@ import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import toast from "react-hot-toast";
 
-
 const collegesInIndia = [
   "Indian Institute of Technology (IIT) Bombay",
   "Indian Institute of Technology (IIT) Delhi",
@@ -24,7 +23,7 @@ const collegesInIndia = [
   "National Institute of Technology (NIT) Surathkal",
   "National Institute of Technology (NIT) Warangal",
   "National Institute of Technology (NIT) Rourkela",
-  "National Institute of Technology (NIT) Calicut", // Kerala
+  "National Institute of Technology (NIT) Calicut",
   "National Institute of Technology (NIT) Kurukshetra",
   "National Institute of Technology (NIT) Durgapur",
   "National Institute of Technology (NIT) Jamshedpur",
@@ -65,7 +64,6 @@ const collegesInIndia = [
   "Indian School of Business (ISB), Hyderabad",
   "Forest Research Institute (FRI), Dehradun",
   "Sikkim Manipal University",
-  // Colleges from Kerala
   "Indian Institute of Space Science and Technology (IIST), Thiruvananthapuram",
   "Federal Institute of Science and Technology (FISAT), Ernakulam",
   "Cochin University of Science and Technology (CUSAT), Kochi",
@@ -76,11 +74,11 @@ const collegesInIndia = [
   "MES College of Engineering, Kuttippuram",
   "Toc H Institute of Science and Technology, Ernakulam",
   "Government College for Women, Thiruvananthapuram",
-  "St. Teresa’s College, Ernakulam",
+  "St. Teresa's College, Ernakulam",
   "Mar Ivanios College, Thiruvananthapuram",
   "Sacred Heart College, Kochi",
   "Farook College, Kozhikode",
-  "St. Joseph’s College, Devagiri, Kozhikode",
+  "St. Joseph's College, Devagiri, Kozhikode",
   "Government Law College, Ernakulam",
   "Mahatma Gandhi University (MGU), Kottayam",
   "University of Kerala, Thiruvananthapuram",
@@ -91,20 +89,23 @@ const collegesInIndia = [
   "Central University of Kerala, Kasaragod",
 ];
 
-
 export default function UserForm() {
   const [formData, setFormData] = useState({
     fullname: "",
-    userType: "college", 
+    userType: "college",
     collegename: "",
     position: "",
     currentPositions: [""],
     year: "",
+    cgpa: "",  
     testimonials: [""],
-    skills: [""], 
-    portfolioUrl: "", 
+    skills: [""],
+    portfolioUrl: "",
     image: null,
     certificates: [],
+    linkedinUrl: "",
+    quote: "",
+    quoteAuthor: ""
   });
 
   const [error, setError] = useState(null);
@@ -114,37 +115,41 @@ export default function UserForm() {
     const addingToast = toast.loading("Adding user...");
     const data = new FormData();
 
-  
     data.append("fullname", formData.fullname);
     data.append("userType", formData.userType);
-    
+    data.append("linkedinUrl", formData.linkedinUrl);
+    data.append("quote", formData.quote);
+    data.append("quoteAuthor", formData.quoteAuthor);
 
     if (formData.userType === "college") {
       data.append("collegename", formData.collegename);
       data.append("year", formData.year);
-    }
-
-  
-    if (formData.userType === "college") {
       data.append("currentPositions", JSON.stringify([formData.position]));
+      
+      // Validate and append CGPA
+      const cgpa = parseFloat(formData.cgpa);
+      if (!isNaN(cgpa) && cgpa >= 0 && cgpa <= 10) {
+        data.append("cgpa", cgpa.toString());
+      } else if (formData.cgpa) {
+        toast.error("CGPA must be between 0 and 10", { id: addingToast });
+        return;
+      }
     } else {
       data.append("currentPositions", JSON.stringify(formData.currentPositions.filter(pos => pos.trim())));
     }
 
-  
-    data.append("testimonials", JSON.stringify(formData.testimonials));
-
- 
-    if (formData.userType === "job" || formData.userType === "development") {
-      data.append("skills", JSON.stringify(formData.skills));
+    if (formData.testimonials.length > 0) {
+      data.append("testimonials", JSON.stringify(formData.testimonials.filter(t => t.trim())));
     }
 
-    
+    if (formData.userType === "job" || formData.userType === "development") {
+      data.append("skills", JSON.stringify(formData.skills.filter(s => s.trim())));
+    }
+
     if (formData.userType === "marketing" || formData.userType === "development") {
       data.append("portfolioUrl", formData.portfolioUrl);
     }
 
-  
     if (formData.image) {
       data.append("image", formData.image);
     }
@@ -175,11 +180,15 @@ export default function UserForm() {
           position: "",
           currentPositions: [""],
           year: "",
+          cgpa: "",  
           testimonials: [""],
           skills: [""],
           portfolioUrl: "",
           image: null,
           certificates: [],
+          linkedinUrl: "",
+          quote: "",
+          quoteAuthor: ""
         });
         setError(null);
       } else {
@@ -205,7 +214,6 @@ export default function UserForm() {
           </Alert>
         )}
 
-        {/* User Type Selection */}
         <div className="space-y-2">
           <Label htmlFor="userType">User Type</Label>
           <select
@@ -221,7 +229,6 @@ export default function UserForm() {
           </select>
         </div>
 
-        {/* Full Name */}
         <div className="space-y-2">
           <Label htmlFor="fullname">Full Name</Label>
           <Input
@@ -232,10 +239,40 @@ export default function UserForm() {
           />
         </div>
 
-        {/* College Fields */}
+        <div className="space-y-2">
+          <Label htmlFor="linkedinUrl">LinkedIn Profile URL</Label>
+          <Input
+            id="linkedinUrl"
+            type="url"
+            placeholder="https://www.linkedin.com/in/username"
+            value={formData.linkedinUrl}
+            onChange={(e) => setFormData({ ...formData, linkedinUrl: e.target.value })}
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="quote">Favorite Quote</Label>
+          <Input
+            id="quote"
+            value={formData.quote}
+            onChange={(e) => setFormData({ ...formData, quote: e.target.value })}
+            placeholder="Enter quote"
+          />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="quoteAuthor">Quote Author</Label>
+          <Input
+            id="quoteAuthor"
+            value={formData.quoteAuthor}
+            onChange={(e) => setFormData({ ...formData, quoteAuthor: e.target.value })}
+            placeholder="Enter the author of the quote"
+          />
+        </div>
+
         {formData.userType === "college" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-             <div className="space-y-2">
+            <div className="space-y-2">
               <Label htmlFor="collegename">College Name</Label>
               <Input
                 id="collegename"
@@ -276,10 +313,23 @@ export default function UserForm() {
                 <option value="4">4</option>
               </select>
             </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="cgpa">CGPA</Label>
+              <Input
+                id="cgpa"
+                type="number"
+                step="0.01"
+                min="0"
+                max="10"
+                value={formData.cgpa}
+                onChange={(e) => setFormData({ ...formData, cgpa: e.target.value })}
+                placeholder="Enter CGPA (0-10)"
+              />
+            </div>
           </div>
         )}
 
-        {/* Job/Development Fields */}
         {(formData.userType === "job" || formData.userType === "development") && (
           <>
             <div className="space-y-2">
@@ -362,9 +412,61 @@ export default function UserForm() {
           </>
         )}
 
-       
+        {formData.userType === "marketing" && (
+          <div className="space-y-2">
+            <Label htmlFor="testimonials">Testimonials</Label>
+            {formData.testimonials.map((testimonial, index) => (
+              <div key={index} className="flex gap-2 mb-2">
+                <Input
+                  value={testimonial}
+                  onChange={(e) => {
+                    const newTestimonials = [...formData.testimonials];
+                    newTestimonials[index] = e.target.value;
+                    setFormData({ ...formData, testimonials: newTestimonials });
+                  }}
+                  required
+                />
+                {formData.testimonials.length > 1 && (
+                  <Button
+                    type="button"
+                    variant="destructive"
+                    onClick={() => {
+                      const newTestimonials = formData.testimonials.filter((_, i) => i !== index);
+                      setFormData({ ...formData, testimonials: newTestimonials });
+                    }}
+                  >
+                    Remove
+                  </Button>
+                )}
+              </div>
+            ))}
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setFormData({
+                ...formData,
+                testimonials: [...formData.testimonials, ""]
+              })}
+            >
+              Add Testimonial
+            </Button>
+          </div>
+        )}
 
-        {/* File Upload Fields */}
+        {(formData.userType === "marketing" || formData.userType === "development") && (
+          <div className="space-y-2">
+            <Label htmlFor="portfolioUrl">Portfolio URL</Label>
+            <Input
+              id="portfolioUrl"
+              type="url"
+              value={formData.portfolioUrl}
+              onChange={(e) => setFormData({ ...formData, portfolioUrl: e.target.value })}
+              placeholder="https://your-portfolio.com"
+              required
+            />
+          </div>
+        )}
+
         <div className="space-y-2">
           <Label htmlFor="image">Profile Image</Label>
           <Input

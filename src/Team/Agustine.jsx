@@ -89,6 +89,7 @@ const MemberPage = () => {
       bio={memberData.bio}
       image={memberData.imageUrl}
       linkedinUrl={memberData.linkedinUrl}
+      author={memberData.quoteAuthor}
       quote={memberData.quote}
       volunteeringOrgs={memberData.volunteeringOrgs}
     />
