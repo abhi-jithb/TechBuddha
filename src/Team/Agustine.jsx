@@ -1,12 +1,74 @@
-import React from 'react';
-import { useParams } from 'react-router-dom'; 
+
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Medal, Award, BookOpen, Trophy, Microscope, Leaf, Smartphone, Factory } from 'lucide-react';
 import MemberProfileSection from '../MemberDetails';
 import AchievementsSection from '../Portfolio';
-import { membersData } from '../constants/index';
+
+const IconMapper = {
+  BookOpen, Award, Medal, Trophy, Microscope, Leaf, Smartphone, Factory,
+};
 
 const MemberPage = () => {
-  const { memberId } = useParams(); 
-  const memberData = membersData[memberId];
+  const { memberId } = useParams();
+  const navigate = useNavigate();
+  const [memberData, setMemberData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchMemberDetails = async () => {
+      if (!memberId) {
+        setError('Member ID is missing');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `https://tech-buddha-server-1-xl0n.onrender.com/members/${encodeURIComponent(memberId)}`
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to fetch member details: ${response.status}`);
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+          setMemberData(result.data);
+        } else {
+          throw new Error(result.error || 'Failed to fetch member details');
+        }
+      } catch (err) {
+        console.error('Error in fetchMemberDetails:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMemberDetails();
+  }, [memberId]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-red-500">Error</h1>
+          <p className="mt-2 text-gray-600">{error}</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!memberData) {
     return (
@@ -20,10 +82,18 @@ const MemberPage = () => {
   }
 
   return (
-    <>
-      <MemberProfileSection {...memberData} />
-      <AchievementsSection achievements={memberData.achievements} />
-    </>
+    <div>
+      <MemberProfileSection
+      name={memberData.fullname}
+      role={memberData.role}
+      bio={memberData.bio}
+      image={memberData.imageUrl}
+      linkedinUrl={memberData.linkedinUrl}
+      quote={memberData.quote}
+      volunteeringOrgs={memberData.volunteeringOrgs}
+    />
+      <AchievementsSection certificates={memberData.certificateUrls} />
+    </div>
   );
 };
 

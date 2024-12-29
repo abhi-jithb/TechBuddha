@@ -38,14 +38,14 @@ const executives = [
   },
 ];
 
-const ProfileCard = ({ name, title, role, imageUrl, path }) => (
-  <div className="bg-slate-50 rounded-3xl py-16 p-6 flex flex-col items-center space-y-4 transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
-    <div className="w-32 h-32 rounded-full bg-slate-200 border-2 border-slate-300 overflow-hidden">
+const ProfileCard = ({ name,role, imageUrl, path }) => (
+  <div className="bg-slate-50 rounded-3xl py-8 px-4 flex flex-col items-center space-y-4 transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
+    <div className="w-24 h-24 rounded-full bg-slate-200 border-2 border-slate-300 overflow-hidden">
       {imageUrl ? (
         <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
       ) : (
         <div className="w-full h-full flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-24 h-24 text-slate-400">
+          <svg viewBox="0 0 24 24" className="w-16 h-16 text-slate-400">
             <path
               fill="currentColor"
               d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z"
@@ -55,16 +55,14 @@ const ProfileCard = ({ name, title, role, imageUrl, path }) => (
       )}
     </div>
     <div className="text-center">
-      <h3 className="font-bold text-black text-xl mb-1">{name}</h3>
-      <p className="text-lg text-slate-600">{title || role}</p>
+      <h3 className="font-bold text-black text-lg mb-1">{name}</h3>
+      <p className="text-sm text-slate-600">{role}</p>
     </div>
-    <Link to={path} className="rounded-full p-4 hover:bg-slate-200 transition-colors group">
-      <Info className="w-10 h-10 text-black group-hover:text-blue-500 transition-colors" />
+    <Link to={path} className="rounded-full p-2 hover:bg-slate-200 transition-colors group">
+      <Info className="w-6 h-6 text-black group-hover:text-blue-500 transition-colors" />
     </Link>
   </div>
 );
-
-
 
 const CollegeSection = ({ college, isOpen, onToggle }) => {
   const headOfCollege = college.members.find(
@@ -141,12 +139,11 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
                   >
                     <ProfileCard
                       name={member.fullname}
-                      role={member.currentPositions}
                       imageUrl={member.imageUrl}
-                      path={`/members/${member.fullname
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
-                    />
+                      role={member.currentPositions[0]}
+                      collegename={member.collegename}
+                      path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
+                      />
                   </div>
                 ))}
               </div>
@@ -314,7 +311,8 @@ export default function ExecutivesDisplay() {
                       name={member.fullname}
                       role={member.currentPositions?.[0]}
                       imageUrl={member.imageUrl}
-                      path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-')}`}
+                      path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
+
                     />
                   ))}
                 </div>
