@@ -11,7 +11,6 @@ const IconMapper = {
   Smartphone: Smartphone,
   Factory: Factory,
 };
-
 const AchievementsSection = ({ certificates }) => {
   const [activeTab, setActiveTab] = useState('college');
   const [expandedCard, setExpandedCard] = useState(null);
@@ -183,10 +182,10 @@ const AchievementsSection = ({ certificates }) => {
   );
 
   return (
-    <div className="min-h-screen from-gray-900 text-white p-8">
+    <div className="min-h-screen from-gray-900 text-white p-8 overflow-x-hidden">
       <div className="max-w-6xl mx-auto space-y-16">
         <div className="text-center space-y-8">
-          <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
+          <h1 className=" text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 text-transparent bg-clip-text">
             Achievements
           </h1>
           <div className="flex justify-center gap-4">
@@ -227,13 +226,13 @@ const AchievementsSection = ({ certificates }) => {
             <div className="relative bg-gray-900 rounded-lg p-6 max-w-3xl w-full">
               <button
                 onClick={() => setSelectedCertificate(null)}
-                className="absolute top-4 right-4 bg-gray-700 hover:bg-gray-600 text-white rounded-full p-2"
+                className="absolute top-4 right-4 text-gray-400 hover:text-white"
               >
                 <X className="w-6 h-6" />
               </button>
               <img
                 src={selectedCertificate}
-                alt="Selected Certificate"
+                alt="Selected certificate"
                 className="w-full h-auto rounded-lg"
               />
             </div>

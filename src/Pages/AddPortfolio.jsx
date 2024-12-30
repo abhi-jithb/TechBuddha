@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -96,114 +96,137 @@ export default function UserForm() {
     collegename: "",
     position: "",
     currentPositions: [""],
+    currentRoles: [""],
     year: "",
-    cgpa: "",  
+    cgpa: "",
     testimonials: [""],
     skills: [""],
     portfolioUrl: "",
     image: null,
     certificates: [],
     linkedinUrl: "",
-    quote: "",
-    quoteAuthor: ""
+    quotes: [{ quote: "", author: "" }],
   });
 
   const [error, setError] = useState(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const addingToast = toast.loading("Adding user...");
-    const data = new FormData();
 
-    data.append("fullname", formData.fullname);
-    data.append("userType", formData.userType);
-    data.append("linkedinUrl", formData.linkedinUrl);
-    data.append("quote", formData.quote);
-    data.append("quoteAuthor", formData.quoteAuthor);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const addingToast = toast.loading("Adding user...");
+  const data = new FormData();
 
-    if (formData.userType === "college") {
+  // Append basic fields
+  data.append("fullname", formData.fullname);
+  data.append("userType", formData.userType);
+  data.append("linkedinUrl", formData.linkedinUrl);
+
+  // Handle quotes
+  data.append("quotes", JSON.stringify(formData.quotes));
+
+  if (formData.userType === "college") {
       data.append("collegename", formData.collegename);
       data.append("year", formData.year);
       data.append("currentPositions", JSON.stringify([formData.position]));
-      
-      // Validate and append CGPA
+
       const cgpa = parseFloat(formData.cgpa);
       if (!isNaN(cgpa) && cgpa >= 0 && cgpa <= 10) {
-        data.append("cgpa", cgpa.toString());
+          data.append("cgpa", cgpa.toString());
       } else if (formData.cgpa) {
-        toast.error("CGPA must be between 0 and 10", { id: addingToast });
-        return;
+          toast.error("CGPA must be between 0 and 10", { id: addingToast });
+          return;
       }
-    } else {
-      data.append("currentPositions", JSON.stringify(formData.currentPositions.filter(pos => pos.trim())));
-    }
+  } else {
+      data.append(
+          "currentPositions",
+          JSON.stringify(formData.currentPositions.filter((pos) => pos.trim()))
+      );
+      data.append(
+          "currentRoles",
+          JSON.stringify(formData.currentRoles.filter((role) => role.trim()))
+      );
+  }
 
-    if (formData.testimonials.length > 0) {
-      data.append("testimonials", JSON.stringify(formData.testimonials.filter(t => t.trim())));
-    }
+  if (formData.testimonials.length > 0) {
+      data.append(
+          "testimonials",
+          JSON.stringify(formData.testimonials.filter((t) => t.trim()))
+      );
+  }
 
-    if (formData.userType === "job" || formData.userType === "development") {
-      data.append("skills", JSON.stringify(formData.skills.filter(s => s.trim())));
-    }
+  if (formData.userType === "job" || formData.userType === "development") {
+      data.append(
+          "skills",
+          JSON.stringify(formData.skills.filter((s) => s.trim()))
+      );
+  }
 
-    if (formData.userType === "marketing" || formData.userType === "development") {
+  if (formData.userType === "marketing" || formData.userType === "development") {
       data.append("portfolioUrl", formData.portfolioUrl);
-    }
+  }
 
-    if (formData.image) {
+  if (formData.image) {
       data.append("image", formData.image);
-    }
-    
-    formData.certificates.forEach((cert) => {
-      if (cert) data.append("certificates", cert);
-    });
+  }
 
-    try {
-      const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/upload", {
-        method: "POST",
-        body: data,
+  if (formData.certificates && formData.certificates.length > 0) {
+      formData.certificates.forEach((cert) => {
+          if (cert) data.append("certificates", cert);
       });
-      
+  }
+
+  try {
+      const response = await fetch(
+          "https://tech-buddha-server-1-xl0n.onrender.com/upload",
+          {
+              method: "POST",
+              body: data,
+          }
+      );
+
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to add user");
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to add user");
       }
 
       const result = await response.json();
-      
+
       if (result.success) {
-        toast.success("User added successfully!", { id: addingToast });
-        setFormData({
-          fullname: "",
-          userType: "college",
-          collegename: "",
-          position: "",
-          currentPositions: [""],
-          year: "",
-          cgpa: "",  
-          testimonials: [""],
-          skills: [""],
-          portfolioUrl: "",
-          image: null,
-          certificates: [],
-          linkedinUrl: "",
-          quote: "",
-          quoteAuthor: ""
-        });
-        setError(null);
+          toast.success("User added successfully!", { id: addingToast });
+          setFormData({
+              fullname: "",
+              userType: "college",
+              collegename: "",
+              position: "",
+              currentPositions: [""],
+              currentRoles: [""],
+              year: "",
+              cgpa: "",
+              testimonials: [""],
+              skills: [""],
+              portfolioUrl: "",
+              image: null,          
+              certificates: [],
+              linkedinUrl: "",
+              quotes: [{ quote: "", author: "" }],
+          });
+          setError(null);
       } else {
-        throw new Error(result.error || "Failed to add user");
+          throw new Error(result.error || "Failed to add user");
       }
-    } catch (error) {
+  } catch (error) {
       console.error("Error:", error);
       toast.error(error.message || "Failed to add user", { id: addingToast });
       setError(error.message || "Failed to add user. Please try again.");
-    }
-  };
+  }
+};
 
   return (
     <div className="w-full text-black mx-auto px-4 min-h-screen py-8 mt-24 bg-white">
-      <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-xl shadow-lg">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-6 bg-white p-8 rounded-xl shadow-lg"
+      >
         <h2 className="text-2xl font-bold text-gray-900 mb-8">Add New User</h2>
 
         {error && (
@@ -220,7 +243,9 @@ export default function UserForm() {
             id="userType"
             className="w-full px-4 py-2 border rounded bg-white text-black"
             value={formData.userType}
-            onChange={(e) => setFormData({ ...formData, userType: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, userType: e.target.value })
+            }
           >
             <option value="college">College</option>
             <option value="job">Job</option>
@@ -234,7 +259,9 @@ export default function UserForm() {
           <Input
             id="fullname"
             value={formData.fullname}
-            onChange={(e) => setFormData({ ...formData, fullname: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, fullname: e.target.value })
+            }
             required
           />
         </div>
@@ -246,28 +273,65 @@ export default function UserForm() {
             type="url"
             placeholder="https://www.linkedin.com/in/username"
             value={formData.linkedinUrl}
-            onChange={(e) => setFormData({ ...formData, linkedinUrl: e.target.value })}
+            onChange={(e) =>
+              setFormData({ ...formData, linkedinUrl: e.target.value })
+            }
           />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="quote">Favorite Quote</Label>
-          <Input
-            id="quote"
-            value={formData.quote}
-            onChange={(e) => setFormData({ ...formData, quote: e.target.value })}
-            placeholder="Enter quote"
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="quoteAuthor">Quote Author</Label>
-          <Input
-            id="quoteAuthor"
-            value={formData.quoteAuthor}
-            onChange={(e) => setFormData({ ...formData, quoteAuthor: e.target.value })}
-            placeholder="Enter the author of the quote"
-          />
+          <Label>Quotes and Authors</Label>
+          {formData.quotes.map((quote, index) => (
+            <div key={index} className="space-y-2 p-4 border rounded-lg mb-4">
+              <Input
+                value={quote.quote}
+                onChange={(e) => {
+                  const newQuotes = [...formData.quotes];
+                  newQuotes[index] = { ...quote, quote: e.target.value };
+                  setFormData({ ...formData, quotes: newQuotes });
+                }}
+                placeholder="Enter quote"
+                className="mb-2"
+              />
+              <Input
+                value={quote.author}
+                onChange={(e) => {
+                  const newQuotes = [...formData.quotes];
+                  newQuotes[index] = { ...quote, author: e.target.value };
+                  setFormData({ ...formData, quotes: newQuotes });
+                }}
+                placeholder="Enter author"
+              />
+              {formData.quotes.length > 1 && (
+                <Button
+                  type="button"
+                  variant="destructive"
+                  onClick={() => {
+                    const newQuotes = formData.quotes.filter(
+                      (_, i) => i !== index
+                    );
+                    setFormData({ ...formData, quotes: newQuotes });
+                  }}
+                >
+                  Remove Quote
+                </Button>
+              )}
+            </div>
+          ))}
+          {formData.quotes.length < 3 && (
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() =>
+                setFormData({
+                  ...formData,
+                  quotes: [...formData.quotes, { quote: "", author: "" }],
+                })
+              }
+            >
+              Add Quote
+            </Button>
+          )}
         </div>
 
         {formData.userType === "college" && (
@@ -278,7 +342,9 @@ export default function UserForm() {
                 id="collegename"
                 list="colleges"
                 value={formData.collegename}
-                onChange={(e) => setFormData({ ...formData, collegename: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, collegename: e.target.value })
+                }
                 required
               />
               <datalist id="colleges">
@@ -292,7 +358,9 @@ export default function UserForm() {
               <Input
                 id="position"
                 value={formData.position}
-                onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, position: e.target.value })
+                }
                 required
               />
             </div>
@@ -302,7 +370,9 @@ export default function UserForm() {
               <select
                 id="year"
                 value={formData.year}
-                onChange={(e) => setFormData({ ...formData, year: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, year: e.target.value })
+                }
                 className="block w-full px-3 py-2 border rounded-md text-black bg-white"
                 required
               >
@@ -323,14 +393,60 @@ export default function UserForm() {
                 min="0"
                 max="10"
                 value={formData.cgpa}
-                onChange={(e) => setFormData({ ...formData, cgpa: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, cgpa: e.target.value })
+                }
                 placeholder="Enter CGPA (0-10)"
               />
             </div>
           </div>
         )}
 
-        {(formData.userType === "job" || formData.userType === "development") && (
+        <div className="space-y-2">
+          <Label htmlFor="currentRoles">Current Role(s)</Label>
+          {formData.currentRoles.map((role, index) => (
+            <div key={index} className="flex gap-2 mb-2">
+              <Input
+                value={role}
+                onChange={(e) => {
+                  const newRoles = [...formData.currentRoles];
+                  newRoles[index] = e.target.value;
+                  setFormData({ ...formData, currentRoles: newRoles });
+                }}
+                required
+              />
+              {formData.currentRoles.length > 1 && (
+                <Button
+                  type="button"
+                  variant="destructive"
+                  onClick={() => {
+                    const newRoles = formData.currentRoles.filter(
+                      (_, i) => i !== index
+                    );
+                    setFormData({ ...formData, currentRoles: newRoles });
+                  }}
+                >
+                  Remove
+                </Button>
+              )}
+            </div>
+          ))}
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() =>
+              setFormData({
+                ...formData,
+                currentRoles: [...formData.currentRoles, ""],
+              })
+            }
+          >
+            Add Role
+          </Button>
+        </div>
+
+        {(formData.userType === "job" ||
+          formData.userType === "development") && (
           <>
             <div className="space-y-2">
               <Label htmlFor="currentPositions">Current Position(s)</Label>
@@ -341,7 +457,10 @@ export default function UserForm() {
                     onChange={(e) => {
                       const newPositions = [...formData.currentPositions];
                       newPositions[index] = e.target.value;
-                      setFormData({ ...formData, currentPositions: newPositions });
+                      setFormData({
+                        ...formData,
+                        currentPositions: newPositions,
+                      });
                     }}
                     required
                   />
@@ -350,8 +469,13 @@ export default function UserForm() {
                       type="button"
                       variant="destructive"
                       onClick={() => {
-                        const newPositions = formData.currentPositions.filter((_, i) => i !== index);
-                        setFormData({ ...formData, currentPositions: newPositions });
+                        const newPositions = formData.currentPositions.filter(
+                          (_, i) => i !== index
+                        );
+                        setFormData({
+                          ...formData,
+                          currentPositions: newPositions,
+                        });
                       }}
                     >
                       Remove
@@ -362,10 +486,12 @@ export default function UserForm() {
               <Button
                 type="button"
                 variant="secondary"
-                onClick={() => setFormData({
-                  ...formData,
-                  currentPositions: [...formData.currentPositions, ""]
-                })}
+                onClick={() =>
+                  setFormData({
+                    ...formData,
+                    currentPositions: [...formData.currentPositions, ""],
+                  })
+                }
               >
                 Add Position
               </Button>
@@ -389,7 +515,9 @@ export default function UserForm() {
                       type="button"
                       variant="destructive"
                       onClick={() => {
-                        const newSkills = formData.skills.filter((_, i) => i !== index);
+                        const newSkills = formData.skills.filter(
+                          (_, i) => i !== index
+                        );
                         setFormData({ ...formData, skills: newSkills });
                       }}
                     >
@@ -401,10 +529,12 @@ export default function UserForm() {
               <Button
                 type="button"
                 variant="secondary"
-                onClick={() => setFormData({
-                  ...formData,
-                  skills: [...formData.skills, ""]
-                })}
+                onClick={() =>
+                  setFormData({
+                    ...formData,
+                    skills: [...formData.skills, ""],
+                  })
+                }
               >
                 Add Skill
               </Button>
@@ -431,8 +561,13 @@ export default function UserForm() {
                     type="button"
                     variant="destructive"
                     onClick={() => {
-                      const newTestimonials = formData.testimonials.filter((_, i) => i !== index);
-                      setFormData({ ...formData, testimonials: newTestimonials });
+                      const newTestimonials = formData.testimonials.filter(
+                        (_, i) => i !== index
+                      );
+                      setFormData({
+                        ...formData,
+                        testimonials: newTestimonials,
+                      });
                     }}
                   >
                     Remove
@@ -443,24 +578,29 @@ export default function UserForm() {
             <Button
               type="button"
               variant="secondary"
-              onClick={() => setFormData({
-                ...formData,
-                testimonials: [...formData.testimonials, ""]
-              })}
+              onClick={() =>
+                setFormData({
+                  ...formData,
+                  testimonials: [...formData.testimonials, ""],
+                })
+              }
             >
               Add Testimonial
             </Button>
           </div>
         )}
 
-        {(formData.userType === "marketing" || formData.userType === "development") && (
+        {(formData.userType === "marketing" ||
+          formData.userType === "development") && (
           <div className="space-y-2">
             <Label htmlFor="portfolioUrl">Portfolio URL</Label>
             <Input
               id="portfolioUrl"
               type="url"
               value={formData.portfolioUrl}
-              onChange={(e) => setFormData({ ...formData, portfolioUrl: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, portfolioUrl: e.target.value })
+              }
               placeholder="https://your-portfolio.com"
               required
             />
@@ -468,28 +608,47 @@ export default function UserForm() {
         )}
 
         <div className="space-y-2">
-          <Label htmlFor="image">Profile Image</Label>
+          <Label htmlFor="image">Profile Image (Required)</Label>
           <Input
             id="image"
             type="file"
             accept="image/*"
-            onChange={(e) => setFormData({ ...formData, image: e.target.files?.[0] || null })}
+            onChange={(e) => {
+              const selectedFile = e.target.files[0];
+              setFormData({ ...formData, image: selectedFile });
+            }}
             required
           />
+          {formData.image && (
+            <div className="mt-2 text-sm text-gray-600">
+              Selected image: {formData.image.name}
+            </div>
+          )}
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="certificates">Certificates (up to 3)</Label>
+          <Label htmlFor="certificates">Certificates (up to 5)</Label>
           <Input
             id="certificates"
             type="file"
             multiple
             accept="application/pdf,image/*"
-            onChange={(e) => setFormData({
-              ...formData,
-              certificates: Array.from(e.target.files || []).slice(0, 3)
-            })}
+            onChange={(e) => {
+              const selectedFiles = Array.from(e.target.files || []).slice(
+                0,
+                5
+              );
+              setFormData({ ...formData, certificates: selectedFiles });
+            }}
           />
+          {formData.certificates.length > 0 && (
+            <div className="mt-2 text-sm text-gray-600">
+              Selected certificates:{" "}
+              {formData.certificates.map((file) => file.name).join(", ")}
+              <br />
+              {formData.certificates.length}/5 certificates selected
+            </div>
+          )}
         </div>
 
         <Button type="submit" className="w-full">

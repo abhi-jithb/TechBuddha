@@ -30,9 +30,9 @@ const NameCard = ({ name }) => (
 );
 
 const ServiceCard = ({ index, title, icon, personImage, name, linkedIn, description }) => (
-  <div className="flex flex-col items-center">
+  <div className="flex flex-col items-center w-[250px]"> {/* Set a fixed width */}
     <NameCard name={name} />
-    <Tilt className="xs:w-[250px] w-full">
+    <Tilt className="w-full">
       <motion.div
         variants={fadeIn("right", "spring", index * 0.5, 0.75)}
         className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card"
@@ -74,6 +74,7 @@ const ServiceCard = ({ index, title, icon, personImage, name, linkedIn, descript
     </Tilt>
   </div>
 );
+
 
 const About = () => {
   return (

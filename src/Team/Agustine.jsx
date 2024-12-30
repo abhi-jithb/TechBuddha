@@ -1,4 +1,4 @@
-
+// MemberPage.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Medal, Award, BookOpen, Trophy, Microscope, Leaf, Smartphone, Factory } from 'lucide-react';
@@ -36,6 +36,7 @@ const MemberPage = () => {
         const result = await response.json();
 
         if (result.success) {
+        
           setMemberData(result.data);
         } else {
           throw new Error(result.error || 'Failed to fetch member details');
@@ -84,15 +85,13 @@ const MemberPage = () => {
   return (
     <div>
       <MemberProfileSection
-      name={memberData.fullname}
-      role={memberData.role}
-      bio={memberData.bio}
-      image={memberData.imageUrl}
-      linkedinUrl={memberData.linkedinUrl}
-      author={memberData.quoteAuthor}
-      quote={memberData.quote}
-      volunteeringOrgs={memberData.volunteeringOrgs}
-    />
+        name={memberData.fullname}
+        currentRoles={memberData.currentRoles || []}
+        image={memberData.imageUrl}
+        linkedinUrl={memberData.linkedinUrl}
+        quotes={memberData.quotes || []}
+        volunteeringOrgs={memberData.volunteeringOrgs}
+      />
       <AchievementsSection certificates={memberData.certificateUrls} />
     </div>
   );

@@ -55,7 +55,7 @@ const Navbar = () => {
           onClick={() => handleNavClick("", "#")}
         >
           <p className='text-white text-[28px] font-bold cursor-pointer flex '>
-            Tech-Buddha &nbsp;
+            Lenient Tree &nbsp;
           </p>
         </Link>
 

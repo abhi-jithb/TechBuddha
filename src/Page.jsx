@@ -38,14 +38,14 @@ const executives = [
   },
 ];
 
-const ProfileCard = ({ name,role, imageUrl, path }) => (
-  <div className="bg-slate-50 rounded-3xl py-8 px-4 flex flex-col items-center space-y-4 transform hover:scale-105 transition-all duration-300 hover:shadow-xl">
-    <div className="w-24 h-24 rounded-full bg-slate-200 border-2 border-slate-300 overflow-hidden">
+const ProfileCard = ({ name, role, imageUrl, path }) => (
+  <div className="bg-slate-50 rounded-3xl py-6 px-3 sm:py-8 sm:px-4 flex flex-col items-center space-y-3 sm:space-y-4 transform hover:scale-105 transition-all duration-300 hover:shadow-xl w-full">
+    <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-slate-200 border-2 border-slate-300 overflow-hidden">
       {imageUrl ? (
         <img src={imageUrl} alt={name} className="w-full h-full object-cover" />
       ) : (
         <div className="w-full h-full flex items-center justify-center">
-          <svg viewBox="0 0 24 24" className="w-16 h-16 text-slate-400">
+          <svg viewBox="0 0 24 24" className="w-10 h-10 sm:w-16 sm:h-16 text-slate-400">
             <path
               fill="currentColor"
               d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z"
@@ -55,21 +55,22 @@ const ProfileCard = ({ name,role, imageUrl, path }) => (
       )}
     </div>
     <div className="text-center">
-      <h3 className="font-bold text-black text-lg mb-1">{name}</h3>
-      <p className="text-sm text-slate-600">{role}</p>
+      <h3 className="font-bold text-black text-base sm:text-lg mb-1">{name}</h3>
+      <p className="text-xs sm:text-sm text-slate-600">{role}</p>
     </div>
-    <Link to={path} className="rounded-full p-2 hover:bg-slate-200 transition-colors group">
-      <Info className="w-6 h-6 text-black group-hover:text-blue-500 transition-colors" />
+    <Link to={path} className="rounded-full p-1.5 sm:p-2 hover:bg-slate-200 transition-colors group">
+      <Info className="w-5 h-5 sm:w-6 sm:h-6 text-black group-hover:text-blue-500 transition-colors" />
     </Link>
   </div>
 );
 
+
 const CollegeSection = ({ college, isOpen, onToggle }) => {
   const headOfCollege = college.members.find(
-    (member) => member.currentPositions[0] === "Head"
+    (member) => member.currentPositions[0] === "College Representatives"
   );
   const otherMembers = college.members.filter(
-    (member) => member.currentPositions[0] !== "Head"
+    (member) => member.currentPositions[0] !== "College Representatives"
   );
   const groupedMembers = otherMembers.reduce((acc, member) => {
     const year = member.year || "Others";
@@ -87,64 +88,45 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
     <div className="bg-slate-800 rounded-lg overflow-hidden mb-6">
       <button
         onClick={onToggle}
-        className="w-full px-8 py-6 flex justify-between items-center hover:bg-slate-700 transition-colors"
+        className="w-full px-4 sm:px-8 py-4 sm:py-6 flex justify-between items-center hover:bg-slate-700 transition-colors"
       >
-        <div className="flex w-full justify-between items-center">
-          <h3 className="text-2xl font-semibold text-white">
+        <div className="flex flex-col sm:flex-row w-full sm:justify-between items-start sm:items-center gap-4">
+          <h3 className="text-xl sm:text-2xl font-semibold text-white">
             {college.collegename}
           </h3>
           {headOfCollege && (
-            <div className="w-1/3">
-              <div className="bg-slate-50 rounded-xl py-8 px-4 flex flex-col items-center space-y-2 transform hover:scale-105 transition-all duration-300 hover:shadow-lg">
-                <div className="w-20 h-20 rounded-full bg-slate-200 border border-slate-300 overflow-hidden">
-                  {headOfCollege.imageUrl ? (
-                    <img src={headOfCollege.imageUrl} alt={headOfCollege.fullname} className="w-full h-full object-cover" />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center">
-                      <svg viewBox="0 0 24 24" className="w-12 h-12 text-slate-400">
-                        <path fill="currentColor" d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM6 8a6 6 0 1 1 12 0A6 6 0 0 1 6 8zm2 10a3 3 0 0 0-3 3 1 1 0 1 1-2 0 5 5 0 0 1 5-5h8a5 5 0 0 1 5 5 1 1 0 1 1-2 0 3 3 0 0 0-3-3H8z" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-                <div className="text-center">
-                  <h3 className="font-semibold text-black text-lg mb-0.5">{headOfCollege.fullname}</h3>
-                  <p className="text-sm text-slate-600">{headOfCollege.currentPositions}</p>
-                </div>
-                <Link to={`/members/${headOfCollege.fullname.toLowerCase().replace(/\s+/g, "-")}`} className="rounded-full p-2 hover:bg-slate-200 transition-colors group">
-                  <Info className="w-6 h-6 text-black group-hover:text-blue-500 transition-colors" />
-                </Link>
-              </div>
+            <div className="w-full sm:w-1/3">
+              <ProfileCard
+                name={headOfCollege.fullname}
+                role={headOfCollege.currentPositions[0]}
+                imageUrl={headOfCollege.imageUrl}
+                path={`/members/${headOfCollege.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
+              />
             </div>
           )}
         </div>
         {isOpen ? (
-          <ChevronUp className="w-8 h-8 text-slate-300" />
+          <ChevronUp className="w-6 h-6 sm:w-8 sm:h-8 text-slate-300 flex-shrink-0 ml-2" />
         ) : (
-          <ChevronDown className="w-8 h-8 text-slate-300" />
+          <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8 text-slate-300 flex-shrink-0 ml-2" />
         )}
       </button>
       {isOpen && (
-        <div className="p-8 bg-slate-700 space-y-8">
+        <div className="p-4 sm:p-8 bg-slate-700 space-y-6 sm:space-y-8">
           {sortedYears.map((year) => (
             <div key={year} className="space-y-4">
-              <h4 className="text-xl font-bold text-slate-300 mb-4">
+              <h4 className="text-lg sm:text-xl font-bold text-slate-300 mb-4">
                 {year} Year
               </h4>
-              <div className="flex flex-wrap gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                 {groupedMembers[year].map((member) => (
-                  <div
+                  <ProfileCard
                     key={member.fullname}
-                    className="w-1/4 max-w-xs flex-shrink-0"
-                  >
-                    <ProfileCard
-                      name={member.fullname}
-                      imageUrl={member.imageUrl}
-                      role={member.currentPositions[0]}
-                      collegename={member.collegename}
-                      path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
-                      />
-                  </div>
+                    name={member.fullname}
+                    imageUrl={member.imageUrl}
+                    role={member.currentPositions[0]}
+                    path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
+                  />
                 ))}
               </div>
             </div>
@@ -154,6 +136,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
     </div>
   );
 };
+
 
 const CategoryFilter = ({ activeFilter, onFilterChange }) => {
   const categories = ['college', 'development', 'marketing', 'job'];
