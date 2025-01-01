@@ -169,7 +169,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
               Projects
             </h4>
             <div className="bg-slate-600 p-4 rounded-lg">
-              <p className="text-slate-300">Project content goes here</p>
+
             </div>
           </div>
         </div>
