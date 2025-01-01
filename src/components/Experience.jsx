@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
+import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import { motion } from "framer-motion";
 import "react-vertical-timeline-component/style.min.css";
-import { styles } from "../styles";
-import { experiences } from "../constants";
-import { SectionWrapper } from "../hoc";
-import { textVariant } from "../utils/motion";
 
 const customTimelineStyles = {
   '.vertical-timeline::before': {
@@ -26,12 +19,10 @@ const ExperienceCard = ({ experience }) => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        (prevIndex + 1) % experience.images.length
-      );
-    }, experience.imageChangeSpeed || 3000);
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % experience.imageUrls.length);
+    }, 3000);
     return () => clearInterval(intervalId);
-  }, [experience.images, experience.imageChangeSpeed]);
+  }, [experience.imageUrls]);
 
   return (
     <VerticalTimelineElement
@@ -42,37 +33,18 @@ const ExperienceCard = ({ experience }) => {
         border: 'none'
       }}
       contentArrowStyle={{ borderRight: "7px solid #232631" }}
-      date={experience.date}
-      iconStyle={{ background: experience.iconBg }}
-      icon={
-        experience.icon && (
-          <div className='flex justify-center items-center w-full h-full'>
-            <img
-              src={experience.icon}
-              alt={experience.title}
-              className='w-[60%] h-[60%] object-contain'
-            />
-          </div>
-        )
-      }
+      date={new Date(experience.createdAt).toLocaleDateString()}
+      iconStyle={{ background: "#232631" }}
     >
       <div>
-        <h3 className='text-white text-[24px] font-bold'>{experience.title}</h3>
-        {experience.company_name && (
-          <p
-            className='text-secondary text-[16px] font-semibold'
-            style={{ margin: 0 }}
-          >
-            {experience.company_name}
-          </p>
-        )}
+        <h3 className="text-white text-2xl font-bold">{experience.name}</h3>
       </div>
-      <div className='mt-5 relative w-full h-[200px] overflow-hidden rounded-lg'>
-        {experience.images && experience.images.length > 0 && (
+      <div className="mt-5 relative w-full h-48 overflow-hidden rounded-lg">
+        {experience.imageUrls && experience.imageUrls.length > 0 && (
           <img
-            src={experience.images[currentImageIndex]}
-            alt={`${experience.title} image ${currentImageIndex + 1}`}
-            className='w-full h-full object-cover transition-opacity duration-500'
+            src={experience.imageUrls[currentImageIndex]}
+            alt={`${experience.name} image ${currentImageIndex + 1}`}
+            className="w-full h-full object-cover transition-opacity duration-500"
           />
         )}
       </div>
@@ -81,10 +53,31 @@ const ExperienceCard = ({ experience }) => {
 };
 
 const Experience = () => {
+  const [achievements, setAchievements] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchAchievements = async () => {
+      try {
+        const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/achievements");
+        if (!response.ok) throw new Error("Failed to fetch achievements");
+        const data = await response.json();
+        setAchievements(data.data);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAchievements();
+  }, []);
+
   useEffect(() => {
     const styleSheet = document.createElement("style");
     styleSheet.textContent = Object.entries(customTimelineStyles)
-      .map(([selector, rules]) => 
+      .map(([selector, rules]) =>
         `${selector} {${Object.entries(rules)
           .map(([property, value]) => `${property}: ${value};`)
           .join('')}}`
@@ -94,25 +87,32 @@ const Experience = () => {
     return () => document.head.removeChild(styleSheet);
   }, []);
 
+  if (loading) return <div className="text-white text-center">Loading achievements...</div>;
+  if (error) return <div className="text-red-500 text-center">Error: {error}</div>;
+
   return (
-    <>
-      <motion.div variants={textVariant()}>
+    <div className="w-full min-h-screen">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
         <p className="text-center font-thin text-5xl text-white mb-8">
           Achievements
         </p>
       </motion.div>
-      <div className='mt-20 flex flex-col'>
+      <div className="mt-20 flex flex-col">
         <VerticalTimeline>
-          {experiences.map((experience, index) => (
+          {achievements.map((achievement, index) => (
             <ExperienceCard
-              key={`experience-${index}`}
-              experience={experience}
+              key={`achievement-${index}`}
+              experience={achievement}
             />
           ))}
         </VerticalTimeline>
       </div>
-    </>
+    </div>
   );
 };
 
-export default SectionWrapper(Experience, "work");
+export default Experience;

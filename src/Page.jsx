@@ -67,11 +67,17 @@ const ProfileCard = ({ name, role, imageUrl, path }) => (
 
 const CollegeSection = ({ college, isOpen, onToggle }) => {
   const headOfCollege = college.members.find(
-    (member) => member.currentPositions[0] === "College Representatives"
+    (member) => member.currentPositions[0].toUpperCase() === "COLLEGE REPRESENTATIVE"
   );
-  const otherMembers = college.members.filter(
-    (member) => member.currentPositions[0] !== "College Representatives"
+
+  const executives = college.members.filter(member => 
+    ["CSO", "CHO", "CEO", "CMO"].includes(member.currentPositions[0].toUpperCase())
   );
+
+  const otherMembers = college.members.filter(member => 
+    !["COLLEGE REPRESENTATIVE", "CSO", "CHO", "CEO", "CMO"].includes(member.currentPositions[0].toUpperCase())
+  );
+
   const groupedMembers = otherMembers.reduce((acc, member) => {
     const year = member.year || "Others";
     if (!acc[year]) acc[year] = [];
@@ -94,7 +100,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
           <h3 className="text-xl sm:text-2xl font-semibold text-white">
             {college.collegename}
           </h3>
-          {headOfCollege && (
+          {headOfCollege && !isOpen && (
             <div className="w-full sm:w-1/3">
               <ProfileCard
                 name={headOfCollege.fullname}
@@ -111,8 +117,34 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
           <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8 text-slate-300 flex-shrink-0 ml-2" />
         )}
       </button>
+      
       {isOpen && (
         <div className="p-4 sm:p-8 bg-slate-700 space-y-6 sm:space-y-8">
+          {headOfCollege && (
+            <div className="flex justify-center mb-8">
+              <div className="w-full max-w-sm">
+                <ProfileCard
+                  name={headOfCollege.fullname}
+                  role={headOfCollege.currentPositions[0]}
+                  imageUrl={headOfCollege.imageUrl}
+                  path={`/members/${headOfCollege.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
+                />
+              </div>
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+            {executives.map((member) => (
+              <ProfileCard
+                key={member.fullname}
+                name={member.fullname}
+                imageUrl={member.imageUrl}
+                role={member.currentPositions[0]}
+                path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
+              />
+            ))}
+          </div>
+
           {sortedYears.map((year) => (
             <div key={year} className="space-y-4">
               <h4 className="text-lg sm:text-xl font-bold text-slate-300 mb-4">
@@ -131,6 +163,15 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
               </div>
             </div>
           ))}
+
+          <div className="mt-8">
+            <h4 className="text-lg sm:text-xl font-bold text-slate-300 mb-4">
+              Projects
+            </h4>
+            <div className="bg-slate-600 p-4 rounded-lg">
+              <p className="text-slate-300">Project content goes here</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
@@ -239,7 +280,6 @@ export default function ExecutivesDisplay() {
   return (
     <div className="min-h-screen bg-slate-900 p-8">
       <div className="space-y-20">
-        {/* Executives Section */}
         <div className="space-y-8">
           <div className="text-center space-y-4 mt-14">
             <h1 className="text-5xl font-bold text-blue-400 mb-2">
@@ -253,7 +293,6 @@ export default function ExecutivesDisplay() {
           </div>
         </div>
 
-        {/* Members Section */}
         <div className="space-y-8">
           <div className="text-center">
             <h2 className="text-4xl font-semibold text-slate-300 mb-8">

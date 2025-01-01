@@ -12,6 +12,7 @@ import Antony from "./Team/Antony";
 import MentorsDisplay from "./Team/Mentor";
 import UserForm from "./Pages/AddPortfolio";
 import { Toaster } from "react-hot-toast";
+import AchievementsForm from "./Pages/AddAchievement";
 
 
 
@@ -48,6 +49,7 @@ const App = () => {
           <Route path="/People" element={<ProfileCard />}  />
           <Route path="/AddPortfolio" element={<UserForm />}  />
           {/* <Route path="/Portfolio" element={<AchievementsSection />}  /> */}
+          <Route path="/AddAchievement" element={<AchievementsForm />}  />
           <Route path="/members/:memberId" element={<Agustine />} />
           <Route path="/mentors/:mentorId" element={<MentorsDisplay />} />
 
