@@ -33,7 +33,7 @@ const ExperienceCard = ({ experience }) => {
         border: 'none'
       }}
       contentArrowStyle={{ borderRight: "7px solid #232631" }}
-      date={new Date(experience.createdAt).toLocaleDateString()}
+      date={new Date(experience.date).toLocaleDateString()}
       iconStyle={{ background: "#232631" }}
     >
       <div>
