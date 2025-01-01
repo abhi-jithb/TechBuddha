@@ -9,29 +9,31 @@ import toast from "react-hot-toast";
 export default function AchievementsForm() {
   const [formData, setFormData] = useState({
     name: "",
-    images: []
+    images: [],
+    date: "",
   });
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const addingToast = toast.loading("Adding achievement...");
-    
-    if (!formData.name || !formData.images.length) {
-      toast.error("Name and images are required", { id: addingToast });
+
+    if (!formData.name || !formData.images.length || !formData.date) {
+      toast.error("Name, date, and images are required", { id: addingToast });
       return;
     }
 
     const data = new FormData();
     data.append("name", formData.name);
-    formData.images.forEach(image => {
+    data.append("date", formData.date);
+    formData.images.forEach((image) => {
       data.append("image", image);
     });
 
     try {
       const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/achievements", {
         method: "POST",
-        body: data
+        body: data,
       });
 
       if (!response.ok) {
@@ -45,7 +47,8 @@ export default function AchievementsForm() {
         toast.success("Achievement added successfully!", { id: addingToast });
         setFormData({
           name: "",
-          images: []
+          images: [],
+          date: "",
         });
         setError(null);
       } else {
@@ -82,6 +85,17 @@ export default function AchievementsForm() {
         </div>
 
         <div className="space-y-2">
+          <Label htmlFor="date">Date</Label>
+          <Input
+            id="date"
+            type="date"
+            value={formData.date}
+            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+            required
+          />
+        </div>
+
+        <div className="space-y-2">
           <Label htmlFor="images">Images (Required)</Label>
           <Input
             id="images"
@@ -96,7 +110,7 @@ export default function AchievementsForm() {
           />
           {formData.images.length > 0 && (
             <div className="mt-2 text-sm text-gray-600">
-              Selected images: {formData.images.map(file => file.name).join(", ")}
+              Selected images: {formData.images.map((file) => file.name).join(", ")}
               <br />
               {formData.images.length} images selected
             </div>
