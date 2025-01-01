@@ -10,7 +10,7 @@ const Hero = () => {
       >
         <div>
           <h1 className={`${styles.heroHeadText} text-white`}>
-            Tech Buddha
+            Lenient Tree
           </h1>
         </div>
       </div>
