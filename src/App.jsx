@@ -13,7 +13,10 @@ import MentorsDisplay from "./Team/Mentor";
 import UserForm from "./Pages/AddPortfolio";
 import { Toaster } from "react-hot-toast";
 import AchievementsForm from "./Pages/AddAchievement";
-
+import UsersList from "./Pages/UserList";
+import EditUser from "./edit/edit";
+import EditAchievements from "./Pages/editAchievement";
+import AdminDashboard from "./Pages/admin";
 
 
 
@@ -48,10 +51,13 @@ const App = () => {
           <Route path="/executives" element={<ExecutivesDisplay />} />
           <Route path="/People" element={<ProfileCard />}  />
           <Route path="/AddPortfolio" element={<UserForm />}  />
-          {/* <Route path="/Portfolio" element={<AchievementsSection />}  /> */}
           <Route path="/AddAchievement" element={<AchievementsForm />}  />
+          <Route path="/editAchievement" element={<EditAchievements />}  />
+          <Route path="/UserList" element={<UsersList />}  />
           <Route path="/members/:memberId" element={<Agustine />} />
           <Route path="/mentors/:mentorId" element={<MentorsDisplay />} />
+          <Route path="/edit/:slug" element={<EditUser />} />
+          <Route path="/admin" element={<AdminDashboard />} />
 
 
 
