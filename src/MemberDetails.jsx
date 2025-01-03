@@ -3,7 +3,7 @@ import { Linkedin } from 'lucide-react';
 
 const MemberProfileSection = ({
   name,
-  currentRoles = [],
+  currentPositions = [],
   image,
   linkedinUrl,
   quotes = [],
@@ -26,9 +26,9 @@ const MemberProfileSection = ({
 
             
 
-              {Array.isArray(currentRoles) && currentRoles.length > 0 ? (
+              {Array.isArray(currentPositions) && currentPositions.length > 0 ? (
     <div className="space-y-1 mb-4">
-        {currentRoles.map((role, index) => (
+        {currentPositions.map((role, index) => (
             <h3 key={index} className="text-xl text-gray-400">{role}</h3>
         ))}
     </div>

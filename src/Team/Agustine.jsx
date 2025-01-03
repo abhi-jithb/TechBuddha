@@ -34,9 +34,10 @@ const MemberPage = () => {
         }
 
         const result = await response.json();
+    
 
         if (result.success) {
-        
+          
           setMemberData(result.data);
         } else {
           throw new Error(result.error || 'Failed to fetch member details');
@@ -48,6 +49,7 @@ const MemberPage = () => {
         setLoading(false);
       }
     };
+   
 
     fetchMemberDetails();
   }, [memberId]);
@@ -86,7 +88,7 @@ const MemberPage = () => {
     <div>
       <MemberProfileSection
         name={memberData.fullname}
-        currentRoles={memberData.currentRoles || []}
+        currentPositions={memberData.currentPositions || []}
         image={memberData.imageUrl}
         linkedinUrl={memberData.linkedinUrl}
         quotes={memberData.quotes || []}
