@@ -71,7 +71,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
   );
 
   const executives = college.members.filter(member => 
-    ["CSO", "CHO", "CEO", "CMO"].includes(member.currentPositions[0].toUpperCase())
+    ["CSO", "CHO", "CAO", "CMO"].includes(member.currentPositions[0].toUpperCase())
   );
 
   const otherMembers = college.members.filter(member => 
