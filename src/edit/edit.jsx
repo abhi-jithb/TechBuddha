@@ -208,7 +208,7 @@ const EditUser = () => {
       if (!response.ok) throw new Error('Failed to update user');
 
       toast.success('User updated successfully', { id: updatingToast });
-      navigate('/users');
+      navigate('/UserList');
     } catch (error) {
       console.error('Error:', error);
       toast.error('Failed to update user', { id: updatingToast });

@@ -22,7 +22,6 @@ export default function AchievementsForm() {
       toast.error("Name, date, and images are required", { id: addingToast });
       return;
     }
-
     const data = new FormData();
     data.append("name", formData.name);
     data.append("date", formData.date);
