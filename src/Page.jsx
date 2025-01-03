@@ -75,7 +75,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
   );
 
   const otherMembers = college.members.filter(member => 
-    !["COLLEGE REPRESENTATIVE", "CSO", "CHO", "CEO", "CMO"].includes(member.currentPositions[0].toUpperCase())
+    !["COLLEGE REPRESENTATIVE", "CSO", "CHO", "CAO", "CMO"].includes(member.currentPositions[0].toUpperCase())
   );
 
   const groupedMembers = otherMembers.reduce((acc, member) => {
