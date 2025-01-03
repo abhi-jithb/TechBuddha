@@ -67,15 +67,17 @@ const ProfileCard = ({ name, role, imageUrl, path }) => (
 
 const CollegeSection = ({ college, isOpen, onToggle }) => {
   const headOfCollege = college.members.find(
-    (member) => member.currentPositions[0].toUpperCase() === "COLLEGE REPRESENTATIVE"
+    (member) => member.currentPositions?.[0]?.toUpperCase() === "COLLEGE REPRESENTATIVE"
   );
 
   const executives = college.members.filter(member => 
-    ["CSO", "CDO", "CAO", "CHO"].includes(member.currentPositions[0].toUpperCase())
+    member.currentPositions?.[0] && 
+    ["CSO", "CHO", "CAO", "CMO"].includes(member.currentPositions[0].toUpperCase())
   );
 
   const otherMembers = college.members.filter(member => 
-    !["COLLEGE REPRESENTATIVE", "CSO", "CDO", "CAO", "CHO"].includes(member.currentPositions[0].toUpperCase())
+    !member.currentPositions?.[0] || 
+    !["COLLEGE REPRESENTATIVE", "CSO", "CHO", "CAO", "CMO"].includes(member.currentPositions[0].toUpperCase())
   );
 
   const groupedMembers = otherMembers.reduce((acc, member) => {
@@ -104,7 +106,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
             <div className="w-full sm:w-1/3">
               <ProfileCard
                 name={headOfCollege.fullname}
-                role={headOfCollege.currentPositions[0]}
+                role={headOfCollege.currentPositions?.[0] || "Member"}
                 imageUrl={headOfCollege.imageUrl}
                 path={`/members/${headOfCollege.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
               />
@@ -125,7 +127,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
               <div className="w-full max-w-sm">
                 <ProfileCard
                   name={headOfCollege.fullname}
-                  role={headOfCollege.currentPositions[0]}
+                  role={headOfCollege.currentPositions?.[0] || "Member"}
                   imageUrl={headOfCollege.imageUrl}
                   path={`/members/${headOfCollege.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
                 />
@@ -139,7 +141,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
                 key={member.fullname}
                 name={member.fullname}
                 imageUrl={member.imageUrl}
-                role={member.currentPositions[0]}
+                role={member.currentPositions?.[0] || "Member"}
                 path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
               />
             ))}
@@ -156,7 +158,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
                     key={member.fullname}
                     name={member.fullname}
                     imageUrl={member.imageUrl}
-                    role={member.currentPositions[0]}
+                    role={member.currentPositions?.[0] || "Member"}
                     path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
                   />
                 ))}
@@ -169,7 +171,6 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
               Projects
             </h4>
             <div className="bg-slate-600 p-4 rounded-lg">
-
             </div>
           </div>
         </div>
@@ -177,7 +178,6 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
     </div>
   );
 };
-
 
 const CategoryFilter = ({ activeFilter, onFilterChange }) => {
   const categories = ['college', 'development', 'marketing', 'job'];
