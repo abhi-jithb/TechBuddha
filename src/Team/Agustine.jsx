@@ -93,7 +93,7 @@ const MemberPage = () => {
         quotes={memberData.quotes || []}
         volunteeringOrgs={memberData.volunteeringOrgs}
       />
-      <AchievementsSection certificates={memberData.certificateUrls} />
+      <AchievementsSection certificates={memberData.certificateUrls} cgpa={memberData.cgpa} />
     </div>
   );
 };

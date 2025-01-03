@@ -11,7 +11,7 @@ const IconMapper = {
   Smartphone: Smartphone,
   Factory: Factory,
 };
-const AchievementsSection = ({ certificates }) => {
+const AchievementsSection = ({ certificates , cgpa }) => {
   const [activeTab, setActiveTab] = useState('college');
   const [expandedCard, setExpandedCard] = useState(null);
   const [selectedCertificate, setSelectedCertificate] = useState(null);
@@ -133,7 +133,7 @@ const AchievementsSection = ({ certificates }) => {
           <h2 className="text-2xl font-semibold text-gray-200 mb-4">Current CGPA</h2>
           <div className="flex justify-center items-center gap-4">
             <div className="text-5xl font-bold bg-gradient-to-r from-green-400 to-blue-500 text-transparent bg-clip-text">
-              {hardcodedAchievements.education.currentCGPA}
+              {cgpa}
             </div>
             <div className="text-gray-400">/ 10</div>
           </div>
