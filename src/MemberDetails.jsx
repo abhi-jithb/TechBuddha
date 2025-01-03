@@ -6,7 +6,7 @@ const MemberProfileSection = ({
   currentPositions = [],
   image,
   linkedinUrl,
-  quotes = [],
+  quotes,
   volunteeringOrgs
 }) => {
   return (

@@ -110,117 +110,112 @@ export default function UserForm() {
 
   const [error, setError] = useState(null);
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const addingToast = toast.loading("Adding user...");
+    const data = new FormData();
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const addingToast = toast.loading("Adding user...");
-  const data = new FormData();
+    data.append("fullname", formData.fullname);
+    data.append("userType", formData.userType);
+    data.append("linkedinUrl", formData.linkedinUrl);
+    data.append("quotes", JSON.stringify(formData.quotes));
 
-  // Append basic fields
-  data.append("fullname", formData.fullname);
-  data.append("userType", formData.userType);
-  data.append("linkedinUrl", formData.linkedinUrl);
-
-  // Handle quotes
-  data.append("quotes", JSON.stringify(formData.quotes));
-
-  if (formData.userType === "college") {
+    if (formData.userType === "college") {
       data.append("collegename", formData.collegename);
       data.append("year", formData.year);
+      data.append("position", formData.position);
       data.append("currentPositions", JSON.stringify([formData.position]));
 
       const cgpa = parseFloat(formData.cgpa);
       if (!isNaN(cgpa) && cgpa >= 0 && cgpa <= 10) {
-          data.append("cgpa", cgpa.toString());
+        data.append("cgpa", cgpa.toString());
       } else if (formData.cgpa) {
-          toast.error("CGPA must be between 0 and 10", { id: addingToast });
-          return;
+        toast.error("CGPA must be between 0 and 10", { id: addingToast });
+        return;
       }
-  } else {
+    } else {
       data.append(
-          "currentPositions",
-          JSON.stringify(formData.currentPositions.filter((pos) => pos.trim()))
+        "currentPositions",
+        JSON.stringify(formData.currentPositions.filter((pos) => pos.trim()))
       );
-      data.append(
-          "currentRoles",
-          JSON.stringify(formData.currentRoles.filter((role) => role.trim()))
-      );
-  }
+    }
 
-  if (formData.testimonials.length > 0) {
-      data.append(
-          "testimonials",
-          JSON.stringify(formData.testimonials.filter((t) => t.trim()))
-      );
-  }
+    data.append(
+      "currentRoles",
+      JSON.stringify(formData.currentRoles.filter((role) => role.trim()))
+    );
 
-  if (formData.userType === "job" || formData.userType === "development") {
+    if (formData.testimonials.length > 0) {
       data.append(
-          "skills",
-          JSON.stringify(formData.skills.filter((s) => s.trim()))
+        "testimonials",
+        JSON.stringify(formData.testimonials.filter((t) => t.trim()))
       );
-  }
+    }
 
-  if (formData.userType === "marketing" || formData.userType === "development") {
+    if (formData.userType === "job" || formData.userType === "development") {
+      data.append(
+        "skillsArray",
+        JSON.stringify(formData.skills.filter((s) => s.trim()))
+      );
+    }
+
+    if (formData.userType === "marketing" || formData.userType === "development") {
       data.append("portfolioUrl", formData.portfolioUrl);
-  }
+    }
 
-  if (formData.image) {
+    if (formData.image) {
       data.append("image", formData.image);
-  }
+    }
 
-  if (formData.certificates && formData.certificates.length > 0) {
+    if (formData.certificates?.length > 0) {
       formData.certificates.forEach((cert) => {
-          if (cert) data.append("certificates", cert);
+        if (cert) data.append("certificates", cert);
       });
-  }
+    }
 
-  try {
-      const response = await fetch(
-          "https://tech-buddha-server-1-xl0n.onrender.com/upload",
-          {
-              method: "POST",
-              body: data,
-          }
-      );
+
+    try {
+      const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/upload", {
+        method: "POST",
+        body: data,
+      });
 
       if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || "Failed to add user");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to add user");
       }
 
       const result = await response.json();
 
       if (result.success) {
-          toast.success("User added successfully!", { id: addingToast });
-          setFormData({
-              fullname: "",
-              userType: "college",
-              collegename: "",
-              position: "",
-              currentPositions: [""],
-              currentRoles: [""],
-              year: "",
-              cgpa: "",
-              testimonials: [""],
-              skills: [""],
-              portfolioUrl: "",
-              image: null,          
-              certificates: [],
-              linkedinUrl: "",
-              quotes: [{ quote: "", author: "" }],
-          });
-          setError(null);
+        toast.success("User added successfully!", { id: addingToast });
+        setFormData({
+          fullname: "",
+          userType: "college",
+          collegename: "",
+          position: "",
+          currentPositions: [""],
+          currentRoles: [""],
+          year: "",
+          cgpa: "",
+          testimonials: [""],
+          skills: [""],
+          portfolioUrl: "",
+          image: null,
+          certificates: [],
+          linkedinUrl: "",
+          quotes: [{ quote: "", author: "" }],
+        });
+        setError(null);
       } else {
-          throw new Error(result.error || "Failed to add user");
+        throw new Error(result.error || "Failed to add user");
       }
-  } catch (error) {
+    } catch (error) {
       console.error("Error:", error);
       toast.error(error.message || "Failed to add user", { id: addingToast });
       setError(error.message || "Failed to add user. Please try again.");
-  }
-};
-
+    }
+  };
   return (
     <div className="w-full text-black mx-auto px-4 min-h-screen py-8 mt-24 bg-white">
       <form
