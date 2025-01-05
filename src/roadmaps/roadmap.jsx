@@ -16,8 +16,7 @@ const LearningRoadmap = () => {
         'JavaScript fundamentals & ES6+',
         'React components, props & JSX',
         'React Hooks & State Management',
-        'React Router & Navigation',
-        'Performance Optimization'
+       
       ]
     },
     {
@@ -235,41 +234,8 @@ const LearningRoadmap = () => {
         </div>
       </div>
 
-      <style jsx>{`
-        .road-path {
-          animation: drawRoad 3s ease-out forwards;
-          stroke-dasharray: 2000;
-          stroke-dashoffset: 2000;
-        }
-
-        .road-dots {
-          animation: drawRoad 3s ease-out forwards;
-          stroke-dasharray: 2000;
-          stroke-dashoffset: 2000;
-        }
-
-        .milestone-circle {
-          animation: fadeIn 1s ease-out forwards;
-          opacity: 0;
-        }
-
-        .milestone-inner {
-          animation: fadeIn 1s ease-out forwards;
-          opacity: 0;
-        }
-
-        @keyframes drawRoad {
-          to {
-            stroke-dashoffset: 0;
-          }
-        }
-
-        @keyframes fadeIn {
-          to {
-            opacity: 1;
-          }
-        }
-      `}</style>
+    
+     
     </testimonialsiv>
   );
 };
