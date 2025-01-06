@@ -63,17 +63,7 @@ const LearningRoadmap = () => {
     }
   ];
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => [...new Set([...prev, entry.target.id])]);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
+
 
     roadmapData.forEach((section) => {
       const element = document.getElementById(section.id);
