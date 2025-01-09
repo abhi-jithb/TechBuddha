@@ -65,6 +65,7 @@ const ProfileCard = ({ name, role, imageUrl, path }) => (
 );
 
 
+
 const CollegeSection = ({ college, isOpen, onToggle }) => {
   const headOfCollege = college.members.find(
     (member) => member.currentPositions?.[0]?.toUpperCase() === "COLLEGE REPRESENTATIVE"
@@ -75,21 +76,34 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
     ["CSO", "CHO", "CAO", "CDO"].includes(member.currentPositions[0].toUpperCase())
   );
 
-  const otherMembers = college.members.filter(member => 
-    !member.currentPositions?.[0] || 
-    !["COLLEGE REPRESENTATIVE", "CSO", "CHO", "CAO", "CDO"].includes(member.currentPositions[0].toUpperCase())
-  );
+  const yearGroups = college.members.reduce((acc, member) => {
+    if (!member.year || 
+        member.currentPositions?.[0]?.toUpperCase() === "COLLEGE REPRESENTATIVE" ||
+        ["CSO", "CHO", "CAO", "CDO"].includes(member.currentPositions?.[0]?.toUpperCase())) {
+      return acc;
+    }
 
-  const groupedMembers = otherMembers.reduce((acc, member) => {
-    const year = member.year || "Others";
-    if (!acc[year]) acc[year] = [];
-    acc[year].push(member);
+    const year = member.year;
+    if (!acc[year]) {
+      acc[year] = {
+        leader: null,
+        members: []
+      };
+    }
+
+    const isYearPosition = member.currentPositions?.[0]?.toLowerCase().includes(year.toLowerCase());
+    
+    if (isYearPosition) {
+      acc[year].leader = member;
+    } else {
+      acc[year].members.push(member);
+    }
     return acc;
   }, {});
 
-  const yearOrder = ["4th", "3rd", "2nd", "1st", "Others"];
-  const sortedYears = Object.keys(groupedMembers).sort(
-    (a, b) => yearOrder.indexOf(b) - yearOrder.indexOf(a)
+  const yearOrder = ["4th", "3rd", "2nd", "1st"];
+  const sortedYears = Object.keys(yearGroups).sort(
+    (a, b) => yearOrder.indexOf(a) - yearOrder.indexOf(b)
   );
 
   return (
@@ -103,7 +117,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
             {college.collegename}
           </h3>
           {headOfCollege && !isOpen && (
-            <div className="w-full sm:w-1/3">
+            <div className="w-full sm:w-1/3 flex justify-center">
               <ProfileCard
                 name={headOfCollege.fullname}
                 role={headOfCollege.currentPositions?.[0] || "Member"}
@@ -121,9 +135,9 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
       </button>
       
       {isOpen && (
-        <div className="p-4 sm:p-8 bg-slate-700 space-y-6 sm:space-y-8">
+        <div className="p-4 sm:p-8 bg-slate-700 space-y-8">
           {headOfCollege && (
-            <div className="flex justify-center mb-8">
+            <div className="flex justify-center">
               <div className="w-full max-w-sm">
                 <ProfileCard
                   name={headOfCollege.fullname}
@@ -135,25 +149,13 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
             </div>
           )}
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {executives.map((member) => (
-              <ProfileCard
-                key={member.fullname}
-                name={member.fullname}
-                imageUrl={member.imageUrl}
-                role={member.currentPositions?.[0] || "Member"}
-                path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
-              />
-            ))}
-          </div>
-
-          {sortedYears.map((year) => (
-            <div key={year} className="space-y-4">
-              <h4 className="text-lg sm:text-xl font-bold text-slate-300 mb-4">
-                {year} Year
+          {executives.length > 0 && (
+            <div className="space-y-4">
+              <h4 className="text-lg sm:text-xl font-bold text-slate-300 text-center">
+                Executives
               </h4>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-                {groupedMembers[year].map((member) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {executives.map((member) => (
                   <ProfileCard
                     key={member.fullname}
                     name={member.fullname}
@@ -164,10 +166,45 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
                 ))}
               </div>
             </div>
+          )}
+
+          {sortedYears.map((year) => (
+            <div key={year} className="space-y-6">
+              <h4 className="text-lg sm:text-xl font-bold text-slate-300 text-center">
+                {year} Year
+              </h4>
+              
+              {yearGroups[year].leader && (
+                <div className="flex justify-center mb-8">
+                  <div className="w-full max-w-sm">
+                    <ProfileCard
+                      name={yearGroups[year].leader.fullname}
+                      role={yearGroups[year].leader.currentPositions[0]}
+                      imageUrl={yearGroups[year].leader.imageUrl}
+                      path={`/members/${yearGroups[year].leader.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {yearGroups[year].members.length > 0 && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {yearGroups[year].members.map((member) => (
+                    <ProfileCard
+                      key={member.fullname}
+                      name={member.fullname}
+                      imageUrl={member.imageUrl}
+                      role={member.currentPositions?.[0] || "Member"}
+                      path={`/members/${member.fullname.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')}`}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           ))}
 
-          <div className="mt-8">
-            <h4 className="text-lg sm:text-xl font-bold text-slate-300 mb-4">
+          <div className="space-y-4">
+            <h4 className="text-lg sm:text-xl font-bold text-slate-300 text-center">
               Projects
             </h4>
             <div className="bg-slate-600 p-4 rounded-lg">
@@ -178,6 +215,7 @@ const CollegeSection = ({ college, isOpen, onToggle }) => {
     </div>
   );
 };
+
 
 const CategoryFilter = ({ activeFilter, onFilterChange }) => {
   const categories = ['college', 'development', 'marketing', 'job'];
