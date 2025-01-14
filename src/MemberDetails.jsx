@@ -80,7 +80,7 @@ const MemberProfileSection = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700"
+              className="bg-inherit rounded-3xl p-8 "
             >
               <div className="h-[350px] md:h-[400px] xl:h-[450px] w-full">
                 <EarthCanvas />

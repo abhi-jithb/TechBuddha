@@ -458,48 +458,7 @@ export default function UserForm() {
               </Button>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="skills">Skills</Label>
-              {formData.skills.map((skill, index) => (
-                <div key={index} className="flex gap-2 mb-2">
-                  <Input
-                    value={skill}
-                    onChange={(e) => {
-                      const newSkills = [...formData.skills];
-                      newSkills[index] = e.target.value;
-                      setFormData({ ...formData, skills: newSkills });
-                    }}
-                    required
-                  />
-                  {formData.skills.length > 1 && (
-                    <Button
-                      type="button"
-                      variant="destructive"
-                      onClick={() => {
-                        const newSkills = formData.skills.filter(
-                          (_, i) => i !== index
-                        );
-                        setFormData({ ...formData, skills: newSkills });
-                      }}
-                    >
-                      Remove
-                    </Button>
-                  )}
-                </div>
-              ))}
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={() =>
-                  setFormData({
-                    ...formData,
-                    skills: [...formData.skills, ""],
-                  })
-                }
-              >
-                Add Skill
-              </Button>
-            </div>
+            
           </>
         )}
 
@@ -567,6 +526,49 @@ export default function UserForm() {
             />
           </div>
         )}
+
+<div className="space-y-2">
+              <Label htmlFor="skills">Skills</Label>
+              {formData.skills.map((skill, index) => (
+                <div key={index} className="flex gap-2 mb-2">
+                  <Input
+                    value={skill}
+                    onChange={(e) => {
+                      const newSkills = [...formData.skills];
+                      newSkills[index] = e.target.value;
+                      setFormData({ ...formData, skills: newSkills });
+                    }}
+                    required
+                  />
+                  {formData.skills.length > 1 && (
+                    <Button
+                      type="button"
+                      variant="destructive"
+                      onClick={() => {
+                        const newSkills = formData.skills.filter(
+                          (_, i) => i !== index
+                        );
+                        setFormData({ ...formData, skills: newSkills });
+                      }}
+                    >
+                      Remove
+                    </Button>
+                  )}
+                </div>
+              ))}
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() =>
+                  setFormData({
+                    ...formData,
+                    skills: [...formData.skills, ""],
+                  })
+                }
+              >
+                Add Skill
+              </Button>
+            </div>
 
         <div className="space-y-2">
           <Label htmlFor="image">Profile Image (Required)</Label>
