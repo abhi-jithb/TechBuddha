@@ -12,7 +12,7 @@ import {
   Shield
 } from 'lucide-react';
 
-const TechStacksLanding = () => {
+const Roadmap = () => {
   const navigate = useNavigate();
 
   const stacks = [
@@ -86,7 +86,7 @@ const TechStacksLanding = () => {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 p-8">
       <div className="max-w-7xl mx-auto pt-16">
         <h1 className="text-5xl font-bold text-center mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-          Choose Your Tech Stack
+          Choose Your Preferred Tech Stack
         </h1>
         <p className="text-gray-400 text-center mb-16 text-xl">
           Select a technology stack to view its detailed learning roadmap
@@ -114,4 +114,4 @@ const TechStacksLanding = () => {
   );
 };
 
-export default TechStacksLanding;
+export default Roadmap;

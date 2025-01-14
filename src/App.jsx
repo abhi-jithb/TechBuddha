@@ -18,6 +18,8 @@ import EditUser from "./edit/edit";
 import EditAchievements from "./Pages/editAchievement";
 import AdminDashboard from "./Pages/admin";
 import LearningRoadmap from "./roadmaps/roadmap";
+import Roadmap from "./Pages/roadmaps";
+
 
 
 
@@ -59,7 +61,8 @@ const App = () => {
           <Route path="/mentors/:mentorId" element={<MentorsDisplay />} />
           <Route path="/edit/:slug" element={<EditUser />} />
           <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/roadmaps/:slug" element={<LearningRoadmap />} />
+          <Route path="/roadmaps" element={<Roadmap />} />
+          <Route path="/roadmap/:slug" element={<LearningRoadmap />} />
 
 
 

@@ -46,7 +46,7 @@ export default function TeamSection() {
   ];
 
   return (
-    <div id='#members' className="min-h-screen bg-navy-950 p-8">
+    <div id='members' className="min-h-screen bg-navy-950 p-8">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-white/80 text-2xl mb-4 text-center">
           Meet the Core Team

@@ -3,15 +3,18 @@ import { Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { EarthCanvas } from './components';
 
-
 const MemberProfileSection = ({
   name,
   currentPositions = [],
   image,
   linkedinUrl,
-  quotes,
-  volunteeringOrgs
+  quotes = [],
+  volunteeringOrgs = []
 }) => {
+  const hasQuotes = Array.isArray(quotes) && quotes.length >= 1;
+  const hasVolunteeringOrgs = Array.isArray(volunteeringOrgs) && volunteeringOrgs.length > 0;
+  const hasCurrentPositions = Array.isArray(currentPositions) && currentPositions.length > 0;
+
   return (
     <div className="bg-gradient-to-b from-gray-900 text-white py-16 overflow-hidden">
       <div className="max-w-6xl mx-auto mt-6 px-8">
@@ -26,17 +29,15 @@ const MemberProfileSection = ({
                 />
               </div>
               <h2 className="text-3xl font-bold mb-2">{name}</h2>
-              
-              {Array.isArray(currentPositions) && currentPositions.length > 0 ? (
+
+              {hasCurrentPositions ? (
                 <div className="space-y-1 mb-4">
                   {currentPositions.map((role, index) => (
                     <h3 key={index} className="text-xl text-gray-400">{role}</h3>
                   ))}
                 </div>
-              ) : (
-                <p className="text-gray-500">No roles available</p>
-              )}
-              
+              ) : null}
+
               {linkedinUrl && (
                 <a
                   href={linkedinUrl}
@@ -50,9 +51,9 @@ const MemberProfileSection = ({
               )}
             </div>
           </div>
-          
+
           <div className="space-y-8">
-            {quotes && quotes.length > 0 && (
+            {hasQuotes && (
               <div className="space-y-6">
                 {quotes.map((quoteItem, index) => (
                   <div
@@ -86,7 +87,7 @@ const MemberProfileSection = ({
               </div>
             </motion.div>
 
-            {volunteeringOrgs && volunteeringOrgs.length > 0 && (
+            {hasVolunteeringOrgs && (
               <div className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700">
                 <h3 className="text-xl font-semibold mb-6">
                   Organizations Currently Volunteering

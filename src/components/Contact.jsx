@@ -22,7 +22,7 @@ export default function EnquiryForm() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0a192f] via-[#0a1525] to-[#080c1a] p-6">
+    <div id='contact' className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0a192f] via-[#0a1525] to-[#080c1a] p-6">
       <h1 className="text-white font-light text-5xl md:text-6xl mb-16 text-center leading-tight">
         Fuel Your Goals with{' '}
         <span className="bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">

@@ -91,7 +91,7 @@ const Experience = () => {
   // if (error) return <div className="text-red-500 text-center">Error: {error}</div>;
 
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen" id="achievements">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
