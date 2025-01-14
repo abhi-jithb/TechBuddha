@@ -1,5 +1,8 @@
 import React from 'react';
 import { Linkedin } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { EarthCanvas } from './components';
+
 
 const MemberProfileSection = ({
   name,
@@ -23,20 +26,17 @@ const MemberProfileSection = ({
                 />
               </div>
               <h2 className="text-3xl font-bold mb-2">{name}</h2>
-
-            
-
+              
               {Array.isArray(currentPositions) && currentPositions.length > 0 ? (
-    <div className="space-y-1 mb-4">
-        {currentPositions.map((role, index) => (
-            <h3 key={index} className="text-xl text-gray-400">{role}</h3>
-        ))}
-    </div>
-) : (
-    <p className="text-gray-500">No roles available</p>
-)}
-
-
+                <div className="space-y-1 mb-4">
+                  {currentPositions.map((role, index) => (
+                    <h3 key={index} className="text-xl text-gray-400">{role}</h3>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-gray-500">No roles available</p>
+              )}
+              
               {linkedinUrl && (
                 <a
                   href={linkedinUrl}
@@ -50,7 +50,7 @@ const MemberProfileSection = ({
               )}
             </div>
           </div>
-
+          
           <div className="space-y-8">
             {quotes && quotes.length > 0 && (
               <div className="space-y-6">
@@ -74,6 +74,17 @@ const MemberProfileSection = ({
                 ))}
               </div>
             )}
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700"
+            >
+              <div className="h-[350px] md:h-[400px] xl:h-[450px] w-full">
+                <EarthCanvas />
+              </div>
+            </motion.div>
 
             {volunteeringOrgs && volunteeringOrgs.length > 0 && (
               <div className="bg-gray-800/50 rounded-3xl p-8 border border-gray-700">

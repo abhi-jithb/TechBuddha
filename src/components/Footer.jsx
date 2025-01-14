@@ -14,7 +14,7 @@ export default function Footer() {
                   <polygon points="20,0 40,40 0,40" className="text-white"/>
                 </svg>
               </div>
-              <span className="text-2xl font-bold">TECH-BUDDHA</span>
+              <span className="text-2xl font-bold">Lenient Tree</span>
             </div>
             <p className="text-gray-400 max-w-xs">
               A new way to make the payments easy, reliable and secure.
@@ -58,7 +58,7 @@ export default function Footer() {
         {/* Bottom Section with Copyright and Social Links */}
         <div className="flex flex-col md:flex-row justify-between items-center mt-16 pt-8 border-t border-gray-800">
           <p className="text-gray-400 text-sm mb-4 md:mb-0">
-            Copyright © 2021 Tech-Buddha. All Rights Reserved.
+            Copyright © 2021 Lenient Tree. All Rights Reserved.
           </p>
           
           <div className="flex space-x-6">

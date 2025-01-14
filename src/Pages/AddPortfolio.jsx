@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -6,88 +6,6 @@ import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import toast from "react-hot-toast";
 
-const collegesInIndia = [
-  "Indian Institute of Technology (IIT) Bombay",
-  "Indian Institute of Technology (IIT) Delhi",
-  "Indian Institute of Technology (IIT) Madras",
-  "Indian Institute of Technology (IIT) Kanpur",
-  "Indian Institute of Technology (IIT) Kharagpur",
-  "Indian Institute of Technology (IIT) Roorkee",
-  "Indian Institute of Technology (IIT) Guwahati",
-  "Indian Institute of Technology (IIT) Hyderabad",
-  "Indian Institute of Technology (IIT) Indore",
-  "Indian Institute of Technology (IIT) Bhubaneswar",
-  "Indian Institute of Technology (IIT) Ropar",
-  "Indian Institute of Technology (IIT) Patna",
-  "National Institute of Technology (NIT) Trichy",
-  "National Institute of Technology (NIT) Surathkal",
-  "National Institute of Technology (NIT) Warangal",
-  "National Institute of Technology (NIT) Rourkela",
-  "National Institute of Technology (NIT) Calicut",
-  "National Institute of Technology (NIT) Kurukshetra",
-  "National Institute of Technology (NIT) Durgapur",
-  "National Institute of Technology (NIT) Jamshedpur",
-  "National Institute of Technology (NIT) Raipur",
-  "BITS Pilani",
-  "BITS Goa",
-  "BITS Hyderabad",
-  "University of Delhi",
-  "Jawaharlal Nehru University (JNU)",
-  "Indian Institute of Science (IISc) Bangalore",
-  "Vellore Institute of Technology (VIT)",
-  "Anna University",
-  "Jamia Millia Islamia",
-  "Aligarh Muslim University",
-  "Banaras Hindu University (BHU)",
-  "Amity University",
-  "SRM Institute of Science and Technology",
-  "Shiv Nadar University",
-  "Ashoka University",
-  "Manipal Academy of Higher Education",
-  "Chandigarh University",
-  "Christ University, Bangalore",
-  "Lovely Professional University (LPU)",
-  "Symbiosis International University, Pune",
-  "Osmania University",
-  "Guru Gobind Singh Indraprastha University (GGSIPU)",
-  "Savitribai Phule Pune University",
-  "Tata Institute of Social Sciences (TISS), Mumbai",
-  "Jadavpur University",
-  "University of Calcutta",
-  "University of Hyderabad",
-  "Panjab University",
-  "Tezpur University",
-  "North-Eastern Hill University (NEHU)",
-  "Maharaja Sayajirao University of Baroda",
-  "Visvesvaraya Technological University (VTU)",
-  "Indian Statistical Institute (ISI) Kolkata",
-  "Indian School of Business (ISB), Hyderabad",
-  "Forest Research Institute (FRI), Dehradun",
-  "Sikkim Manipal University",
-  "Indian Institute of Space Science and Technology (IIST), Thiruvananthapuram",
-  "Federal Institute of Science and Technology (FISAT), Ernakulam",
-  "Cochin University of Science and Technology (CUSAT), Kochi",
-  "College of Engineering Trivandrum (CET)",
-  "Government Engineering College, Thrissur",
-  "Rajagiri School of Engineering and Technology, Kochi",
-  "National Institute of Fashion Technology (NIFT), Kannur",
-  "MES College of Engineering, Kuttippuram",
-  "Toc H Institute of Science and Technology, Ernakulam",
-  "Government College for Women, Thiruvananthapuram",
-  "St. Teresa's College, Ernakulam",
-  "Mar Ivanios College, Thiruvananthapuram",
-  "Sacred Heart College, Kochi",
-  "Farook College, Kozhikode",
-  "St. Joseph's College, Devagiri, Kozhikode",
-  "Government Law College, Ernakulam",
-  "Mahatma Gandhi University (MGU), Kottayam",
-  "University of Kerala, Thiruvananthapuram",
-  "Kannur University",
-  "Calicut University",
-  "Amrita Vishwa Vidyapeetham, Kollam",
-  "Indian Institute of Management (IIM), Kozhikode",
-  "Central University of Kerala, Kasaragod",
-];
 
 export default function UserForm() {
   const [formData, setFormData] = useState({
@@ -173,6 +91,10 @@ export default function UserForm() {
       });
     }
 
+    if (formData.userType === "college" && !colleges.includes(formData.collegename)) {
+      await addNewCollege(formData.collegename);
+    }
+
 
     try {
       const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/upload", {
@@ -216,6 +138,50 @@ export default function UserForm() {
       setError(error.message || "Failed to add user. Please try again.");
     }
   };
+
+  const [colleges, setColleges] = useState([]);
+
+  useEffect(() => {
+    fetchColleges();
+  }, []); 
+
+  const fetchColleges = async () => {
+    try {
+      const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/colleges");
+      const data = await response.json();
+      setColleges(data.map(college => college.collegename));
+    } catch (err) {
+      console.error("Error fetching colleges:", err);
+      toast.error("Failed to fetch colleges");
+    }
+  };
+
+  const addNewCollege = async (collegeName) => {
+    try {
+      const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/addCollege", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          collegename: collegeName,
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        toast.success("New college added successfully!");
+        fetchColleges();
+      } else {
+        toast.error(data.message || "Failed to add college");
+      }
+    } catch (err) {
+      console.error("Error adding new college:", err);
+      toast.error("Failed to add new college");
+    }
+  };
+
   return (
     <div className="w-full text-black mx-auto px-4 min-h-screen py-8 mt-24 bg-white">
       <form
@@ -330,24 +296,24 @@ export default function UserForm() {
         </div>
 
         {formData.userType === "college" && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-2">
-              <Label htmlFor="collegename">College Name</Label>
-              <Input
-                id="collegename"
-                list="colleges"
-                value={formData.collegename}
-                onChange={(e) =>
-                  setFormData({ ...formData, collegename: e.target.value })
-                }
-                required
-              />
-              <datalist id="colleges">
-                {collegesInIndia.map((college, index) => (
-                  <option key={index} value={college} />
-                ))}
-              </datalist>
-            </div>
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+           <div className="space-y-2">
+             <Label htmlFor="collegename">College Name</Label>
+             <Input
+               id="collegename"
+               list="colleges"
+               value={formData.collegename}
+               onChange={(e) =>
+                 setFormData({ ...formData, collegename: e.target.value })
+               }
+               required
+             />
+             <datalist id="colleges">
+               {colleges.map((college, index) => (
+                 <option key={index} value={college} />
+               ))}
+             </datalist>
+           </div>
             <div className="space-y-2">
               <Label htmlFor="position">Position</Label>
               <Input
