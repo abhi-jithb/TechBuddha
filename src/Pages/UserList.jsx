@@ -12,7 +12,7 @@ const UsersList = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch('https://tech-buddha-server-1-xl0n.onrender.com/members');
+      const response = await fetch('https://tech-buddha-server-1.onrender.com/members');
       if (!response.ok) {
         throw new Error('Failed to fetch users');
       }
@@ -40,7 +40,7 @@ const UsersList = () => {
     const deletingToast = toast.loading('Deleting user...');
     try {
       const response = await fetch(
-        `https://tech-buddha-server-1-xl0n.onrender.com/members/${userId}`,
+        `https://tech-buddha-server-1.onrender.com/members/${userId}`,
         {
           method: 'DELETE',
         }
