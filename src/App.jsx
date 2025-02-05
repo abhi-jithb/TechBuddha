@@ -19,6 +19,7 @@ import EditAchievements from "./Pages/editAchievement";
 import AdminDashboard from "./Pages/admin";
 import LearningRoadmap from "./roadmaps/roadmap";
 import Roadmap from "./Pages/roadmaps";
+import Calender from "../src/components/calender/Calender"
 
 
 
@@ -63,6 +64,7 @@ const App = () => {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/roadmaps" element={<Roadmap />} />
           <Route path="/roadmap/:slug" element={<LearningRoadmap />} />
+          <Route path="/calender" element={<Calender />} />
 
 
 
