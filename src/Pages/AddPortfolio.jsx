@@ -97,7 +97,7 @@ export default function UserForm() {
 
 
     try {
-      const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/upload", {
+      const response = await fetch("https://tech-buddha-server-1.onrender.com/upload", {
         method: "POST",
         body: data,
       });
@@ -147,7 +147,7 @@ export default function UserForm() {
 
   const fetchColleges = async () => {
     try {
-      const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/colleges");
+      const response = await fetch("https://tech-buddha-server-1.onrender.com/colleges");
       const data = await response.json();
       setColleges(data.map(college => college.collegename));
     } catch (err) {
@@ -158,7 +158,7 @@ export default function UserForm() {
 
   const addNewCollege = async (collegeName) => {
     try {
-      const response = await fetch("https://tech-buddha-server-1-xl0n.onrender.com/addCollege", {
+      const response = await fetch("https://tech-buddha-server-1.onrender.com/addCollege", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
