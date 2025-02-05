@@ -1,117 +1,120 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
-import { useNavigate } from 'react-router-dom';
-import {
-  Code2,
-  Layout,
-  Database,
-  Cloud,
-  Smartphone,
-  Bot,
-  Brain,
-  Shield
-} from 'lucide-react';
+import { Brain, Code2, Database } from 'lucide-react';
 
-const Roadmap = () => {
-  const navigate = useNavigate();
-
-  const stacks = [
+const LandingPage = () => {
+  const courses = [
+    {
+      id: 'python',
+      title: 'PYTHON',
+      level: 'Beginner Level',
+      icon: Code2,
+      gradient: 'from-blue-500 to-cyan-500'
+    },
     {
       id: 'mern',
-      title: 'MERN Stack',
-      description: 'MongoDB, Express.js, React, Node.js',
-      icon: Code2,
-      gradient: 'from-green-500 to-blue-500',
-      path: '/roadmap/mern'
-    },
-    {
-      id: 'jamstack',
-      title: 'JAMstack',
-      description: 'JavaScript, APIs, and Markup',
-      icon: Layout,
-      gradient: 'from-purple-500 to-pink-500',
-      path: '/roadmap/jamstack'
-    },
-    {
-      id: 'data',
-      title: 'Data Engineering',
-      description: 'Python, SQL, Apache Spark, Airflow',
+      title: 'MERN',
+      level: 'Intermediate Level',
       icon: Database,
-      gradient: 'from-blue-500 to-cyan-500',
-      path: '/roadmap/data'
+      gradient: 'from-purple-500 to-pink-500'
     },
     {
-      id: 'cloud',
-      title: 'Cloud Native',
-      description: 'AWS, Docker, Kubernetes, Terraform',
-      icon: Cloud,
-      gradient: 'from-orange-500 to-red-500',
-      path: '/roadmap/cloud'
-    },
-    {
-      id: 'mobile',
-      title: 'Mobile Development',
-      description: 'React Native, Flutter, iOS, Android',
-      icon: Smartphone,
-      gradient: 'from-sky-500 to-indigo-500',
-      path: '/roadmap/mobile'
-    },
-    {
-      id: 'ai',
-      title: 'AI/ML Engineering',
-      description: 'Python, TensorFlow, PyTorch, scikit-learn',
+      id: 'aiml',
+      title: 'AI&ML',
+      level: 'Advanced Level',
       icon: Brain,
-      gradient: 'from-violet-500 to-purple-500',
-      path: '/roadmap/ai'
+      gradient: 'from-orange-500 to-red-500'
+    }
+  ];
+
+  const categories = [
+    {
+      id: 'roadmap',
+      image: '/api/placeholder/400/320',
+      title: 'MERN',
+      description: 'Full stack development path'
     },
     {
-      id: 'devops',
-      title: 'DevOps',
-      description: 'CI/CD, Infrastructure as Code, Monitoring',
-      icon: Bot,
-      gradient: 'from-emerald-500 to-teal-500',
-      path: '/roadmap/devops'
+      id: 'talents',
+      image: '/api/placeholder/400/320',
+      title: 'UNCOVER YOUR TALENTS',
+      description: 'Discover your potential'
     },
     {
-      id: 'security',
-      title: 'Security Engineering',
-      description: 'Security tools, Pen testing, Compliance',
-      icon: Shield,
-      gradient: 'from-red-500 to-rose-500',
-      path: '/roadmap/security'
+      id: 'gaming',
+      image: '/api/placeholder/400/320',
+      title: 'GAMING',
+      description: 'Learn game development'
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 p-8">
-      <div className="max-w-7xl mx-auto pt-16">
-        <h1 className="text-5xl font-bold text-center mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-          Choose Your Preferred Tech Stack
-        </h1>
-        <p className="text-gray-400 text-center mb-16 text-xl">
-          Select a technology stack to view its detailed learning roadmap
-        </p>
+    <div className="min-h-screen bg-gray-100">
+      {/* Header Section */}
+      <header className="bg-gray-800 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <h1 className="text-2xl font-bold">LENIENT TREE</h1>
+            </div>
+            <nav>
+              <button className="bg-black px-6 py-2 rounded">COURSE</button>
+            </nav>
+          </div>
+          
+          <div className="mt-16 mb-8">
+            <h2 className="text-3xl font-bold mb-4">ROAD MAPS FOR BEGINNERS</h2>
+            <p className="text-gray-300">Start your journey in the world of CS languages.</p>
+            <button className="mt-6 bg-black text-white px-8 py-3 rounded">Get Started</button>
+          </div>
+        </div>
+      </header>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {stacks.map((stack) => (
-            <Card
-              key={stack.id}
-              className="p-6 bg-gray-800/90 backdrop-blur border-gray-700 hover:scale-105 transition-transform duration-300 cursor-pointer"
-              onClick={() => navigate(stack.path)}
+      {/* Courses Section */}
+      <section className="max-w-7xl mx-auto px-4 py-16">
+        <h2 className="text-3xl font-bold mb-12 text-center">COURSES</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {courses.map((course) => (
+            <Card 
+              key={course.id}
+              className="p-6 hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="flex flex-col items-center text-center space-y-4">
-                <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${stack.gradient} flex items-center justify-center`}>
-                  <stack.icon className="w-8 h-8 text-white" />
+              <div className="flex flex-col items-center text-center">
+                <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${course.gradient} flex items-center justify-center mb-4`}>
+                  <course.icon className="w-8 h-8 text-white" />
                 </div>
-                <h2 className="text-xl font-semibold text-white">{stack.title}</h2>
-                <p className="text-gray-400">{stack.description}</p>
+                <h3 className="text-xl font-bold mb-2">{course.title}</h3>
+                <p className="text-gray-600">{course.level}</p>
+                <a href="#" className="mt-4 text-blue-600 hover:underline">YouTube Link</a>
               </div>
             </Card>
           ))}
         </div>
-      </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="bg-gray-800 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {categories.map((category) => (
+              <Card 
+                key={category.id}
+                className="bg-gray-700 p-4 hover:shadow-xl transition-shadow duration-300"
+              >
+                <img 
+                  src={category.image}
+                  alt={category.title}
+                  className="w-full h-48 object-cover rounded-lg mb-4"
+                />
+                <h3 className="text-xl font-bold mb-2">{category.title}</h3>
+                <p className="text-gray-300">{category.description}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
 
-export default Roadmap;
+export default LandingPage;
