@@ -5,6 +5,8 @@ import { services } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
 import Tilt from 'react-parallax-tilt';
+import Calender from '../components/calender/Calender.jsx'
+
 
 const LinkedInIcon = () => (
   <svg
@@ -87,6 +89,7 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
+        <Calender/>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae nostrum 
         aliquam asperiores itaque explicabo minima ex numquam laboriosam modi at 
         eius nesciunt fuga accusamus earum deserunt sed blanditiis, dolorum commodi!
