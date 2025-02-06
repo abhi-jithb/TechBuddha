@@ -4,9 +4,8 @@ import { styles } from "../styles";
 import { services } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
-import Tilt from 'react-parallax-tilt';
-import Calender from '../components/calender/Calender.jsx'
-
+import Tilt from "react-parallax-tilt";
+import Calender from "../components/calender/Calender.jsx";
 
 const LinkedInIcon = () => (
   <svg
@@ -31,8 +30,18 @@ const NameCard = ({ name }) => (
   </motion.div>
 );
 
-const ServiceCard = ({ index, title, icon, personImage, name, linkedIn, description }) => (
-  <div className="flex flex-col items-center w-[250px]"> {/* Set a fixed width */}
+const ServiceCard = ({
+  index,
+  title,
+  icon,
+  personImage,
+  name,
+  linkedIn,
+  description,
+}) => (
+  <div className="flex flex-col items-center w-[250px]">
+    {" "}
+    {/* Set a fixed width */}
     <NameCard name={name} />
     <Tilt className="w-full">
       <motion.div
@@ -77,7 +86,6 @@ const ServiceCard = ({ index, title, icon, personImage, name, linkedIn, descript
   </div>
 );
 
-
 const About = () => {
   return (
     <>
@@ -85,22 +93,15 @@ const About = () => {
         <p className={styles.sectionSubText}>Introduction</p>
         <h2 className={styles.sectionHeadText}>Overview.</h2>
       </motion.div>
-      <motion.p
+      <motion.div
         variants={fadeIn("", "", 0.1, 1)}
-        className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
+        className="mt-4 text-secondary text-[17px] max-w-screen leading-[30px]"
       >
-        <Calender/>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae nostrum 
-        aliquam asperiores itaque explicabo minima ex numquam laboriosam modi at 
-        eius nesciunt fuga accusamus earum deserunt sed blanditiis, dolorum commodi!
-      </motion.p>
+        <Calender />
+      </motion.div>
       <div className="mt-20 flex flex-wrap gap-10 justify-center">
         {services.map((service, index) => (
-          <ServiceCard
-            key={service.title}
-            index={index}
-            {...service}
-          />
+          <ServiceCard key={service.title} index={index} {...service} />
         ))}
       </div>
     </>
