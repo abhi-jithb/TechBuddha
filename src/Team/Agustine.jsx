@@ -25,7 +25,7 @@ const MemberPage = () => {
 
       try {
         const response = await fetch(
-          `https://tech-buddha-server-1-xl0n.onrender.com/members/${encodeURIComponent(memberId)}`
+          `https://tech-buddha-server-1.onrender.com/members/${encodeURIComponent(memberId)}`
         );
 
         if (!response.ok) {
@@ -90,6 +90,7 @@ const MemberPage = () => {
         currentPositions={memberData.currentPositions || []}
         image={memberData.imageUrl}
         linkedinUrl={memberData.linkedinUrl}
+        skills={memberData.skills}
         quotes={memberData.quotes || []}
         volunteeringOrgs={memberData.volunteeringOrgs}
       />
